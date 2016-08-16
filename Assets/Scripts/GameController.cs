@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
         m_totalDistance += gameSpeed * Time.deltaTime;
         gameSpeed += acceleration * Time.deltaTime;
 
-        scoreText.text = m_totalDistance.ToString("0.0");
+        scoreText.text = m_totalDistance.ToString("0");
 	}
 
     void OnPlayerDied()
