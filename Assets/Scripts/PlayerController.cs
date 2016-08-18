@@ -10,6 +10,11 @@ public class PlayerController : MonoBehaviour
     public GameObject graphic;
     public TouchGroundController groundChecker;
 
+    public bool IsTouchingGround()
+    {
+        return groundChecker.IsTouchingGround();
+    }
+
 	void Start ()
 	{
         m_rigidbody = GetComponent<Rigidbody2D>();
@@ -19,7 +24,7 @@ public class PlayerController : MonoBehaviour
 	void Update ()
 	{
         m_animator.SetBool("IsTouchingGround", groundChecker.IsTouchingGround());
-        m_animator.SetFloat("SpeedRatio", game.gameSpeed / cruiseSpeed);
+        m_animator.SetFloat("SpeedRatio", Mathf.Min(game.gameSpeed / cruiseSpeed, 1.0f));
 
         if (input.GetJumpInput() && groundChecker.IsTouchingGround() && m_rigidbody.velocity.y < 0.1f)
         {

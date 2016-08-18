@@ -11,10 +11,10 @@ public class GameController : MonoBehaviour
 
 	void Start ()
 	{
-	
-	}
-	
-	void Update ()
+
+    }
+
+    void Update ()
 	{
         m_totalDistance += gameSpeed * Time.deltaTime;
         gameSpeed += acceleration * Time.deltaTime;
