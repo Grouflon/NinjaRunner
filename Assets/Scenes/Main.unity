@@ -190,6 +190,15 @@ Prefab:
       propertyPath: game
       value: 
       objectReference: {fileID: 1322904322}
+    - target: {fileID: 21266646, guid: 5ece3b41e389b484ab46d8a84c54655e, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300004, guid: cdc9fde9eca9f184b914ceaf02be2138,
+        type: 3}
+    - target: {fileID: 454600, guid: 5ece3b41e389b484ab46d8a84c54655e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ece3b41e389b484ab46d8a84c54655e, type: 2}
   m_IsPrefabParent: 0
