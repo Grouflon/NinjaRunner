@@ -180,7 +180,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 420258, guid: 5ece3b41e389b484ab46d8a84c54655e, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11434428, guid: 5ece3b41e389b484ab46d8a84c54655e, type: 2}
       propertyPath: input
@@ -493,7 +493,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   game: {fileID: 1322904322}
-  blockPrefab: {fileID: 112816, guid: 4958dd3288f944044acd29e5cebb9255, type: 2}
+  blockPrefab: {fileID: 11482152, guid: 4958dd3288f944044acd29e5cebb9255, type: 2}
+  slopePrefab: {fileID: 11460388, guid: 8846a37e93ad6de409e27a91e2efd151, type: 2}
   unitSize: 1
   minBlockWidth: 10
   maxBlockWidth: 20
@@ -503,6 +504,14 @@ MonoBehaviour:
   minLowerDiff: 5
   minHeight: 1
   maxHeight: 20
+  minUphillWidth: 1
+  maxUphillWidth: 2
+  minDownhillWidth: 4
+  maxDownhillWidth: 7
+  blockWeight: 5
+  gapWeight: 5
+  uphillWeight: 5
+  downhillWeight: 5
 --- !u!1 &1322904320
 GameObject:
   m_ObjectHideFlags: 0

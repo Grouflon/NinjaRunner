@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour
 
     void OnPlayerDied()
     {
-        SceneManager.LoadScene("Main");
+        //SceneManager.LoadScene("Main");
     }
 
     private float m_totalDistance = 0.0f;

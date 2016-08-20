@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class LevelSpawnController : MonoBehaviour
 {
     public GameController game;
-    public GameObject blockPrefab;
+    public BlockController blockPrefab;
+    public SlopeController slopePrefab;
 
     public float unitSize = 1.0f;
     public int minBlockWidth = 5;
@@ -16,10 +18,25 @@ public class LevelSpawnController : MonoBehaviour
     public int minHeight = 1;
     public int maxHeight = 20;
 
+    public int minUphillWidth = 1;
+    public int maxUphillWidth = 2;
+
+    public int minDownhillWidth = 2;
+    public int maxDownhillWidth = 5;
+
+    public float blockWeight = 5.0f;
+    public float gapWeight = 5.0f;
+    public float uphillWeight = 1.0f;
+    public float downhillWeight = 1.0f;
+
+    // TODO: speed modifiers
+
     enum ModuleType
     {
-        Block,
-        Gap
+        Block = 0,
+        Gap,
+        Uphill,
+        Downhill
     }
 
     void Start ()
@@ -32,21 +49,20 @@ public class LevelSpawnController : MonoBehaviour
         m_currentHeight = minHeight;
 
         float blockWidth = m_predictionDistance;
-        GameObject block = (GameObject)Instantiate(blockPrefab, new Vector3(m_viewportStart, m_currentHeight * unitSize, 0.0f), Quaternion.identity);
-        BlockController blockController = block.GetComponent<BlockController>();
-        blockController.game = game;
+        BlockController block = (BlockController)Instantiate(blockPrefab, new Vector3(m_viewportStart, m_currentHeight * unitSize, 0.0f), Quaternion.identity);
+        block.game = game;
         Vector3 scale = block.transform.localScale;
         scale.x = blockWidth;
-        blockController.width = blockWidth;
+        block.width = blockWidth;
         block.transform.localScale = scale;
 
         m_previousModuleType = ModuleType.Block;
         m_distancePredicted += blockWidth;
     }
 	
-	void Update ()
+	void FixedUpdate ()
 	{
-        // KEEP VARS UPDATED IF WE TWEAK DEBUGGER
+        // KEEP VARS UPDATED IF WE TWEAK THINGS IN EDITOR
         m_predictionDistance = Mathf.Ceil(m_viewportLength / unitSize) * unitSize;
 
 
@@ -55,24 +71,19 @@ public class LevelSpawnController : MonoBehaviour
             GenerateNewModule();
         }
 
-        m_distancePassed += game.gameSpeed * Time.deltaTime;
+        m_distancePassed += game.gameSpeed * Time.fixedDeltaTime;
 	}
 
     void GenerateNewModule()
     {
-        ModuleType nextModule = ModuleType.Gap;
-        float moduleSize = 0f;
-        switch(m_previousModuleType)
-        {
-            case ModuleType.Block:  nextModule = ModuleType.Gap;    break;
-            case ModuleType.Gap:    nextModule = ModuleType.Block;  break;
-        }
+        ModuleType nextModule = PickNextModuleType(m_previousModuleType);
 
+        float moduleSize = 0f;
         switch(nextModule)
         {
             case ModuleType.Gap:
                 {
-                    int gapWidth = Random.Range(minGapWidth, maxGapWidth);
+                    int gapWidth = UnityEngine.Random.Range(minGapWidth, maxGapWidth);
 
                     moduleSize = (float)gapWidth * unitSize;
                 }
@@ -80,27 +91,130 @@ public class LevelSpawnController : MonoBehaviour
 
             case ModuleType.Block:
                 {
-                    int blockWidth = Random.Range(minBlockWidth, maxBlockWidth);
-                    int minHeightRange = Mathf.Max(m_currentHeight - minLowerDiff, minHeight);
-                    int maxHeightRange = Mathf.Min(m_currentHeight + maxUpperDiff, maxHeight);
-                    int blockHeight = Random.Range(minHeightRange, maxHeightRange);
-                    m_currentHeight = blockHeight;
+                    int blockWidth = UnityEngine.Random.Range(minBlockWidth, maxBlockWidth);
 
-                    GameObject block = (GameObject)Instantiate(blockPrefab, new Vector3(m_viewportStart + (m_distancePredicted - m_distancePassed), blockHeight * unitSize, 0.0f), Quaternion.identity);
-                    BlockController blockController = block.GetComponent<BlockController>();
-                    blockController.game = game;
+                    if (m_previousModuleType == ModuleType.Gap)
+                    {
+                        int minHeightRange = Mathf.Max(m_currentHeight - minLowerDiff, minHeight);
+                        int maxHeightRange = Mathf.Min(m_currentHeight + maxUpperDiff, maxHeight);
+                        int blockHeight = UnityEngine.Random.Range(minHeightRange, maxHeightRange);
+                        m_currentHeight = blockHeight;
+                    }
+
+                    BlockController block = (BlockController)Instantiate(blockPrefab, new Vector3(m_viewportStart + (m_distancePredicted - m_distancePassed), m_currentHeight * unitSize, 0.0f), Quaternion.identity);
+                    block.game = game;
                     Vector3 scale = block.transform.localScale;
                     scale.x = blockWidth;
-                    blockController.width = blockWidth;
+                    block.width = blockWidth;
                     block.transform.localScale = scale;
 
                     moduleSize = (float)blockWidth * unitSize;
+                }
+                break;
+
+            case ModuleType.Uphill:
+                {
+                    int blockWidth = UnityEngine.Random.Range(minUphillWidth, maxUphillWidth);
+                    blockWidth = Mathf.Min(blockWidth, m_currentHeight - minHeight);
+                    int minHeightRange = Mathf.Max(m_currentHeight - minLowerDiff, minHeight);
+                    int maxHeightRange = Mathf.Min(m_currentHeight + maxUpperDiff, maxHeight - blockWidth);
+                    int blockHeight = UnityEngine.Random.Range(minHeightRange, maxHeightRange);
+                    m_currentHeight = blockHeight;
+
+                    SlopeController slope = (SlopeController)Instantiate(slopePrefab, new Vector3(m_viewportStart + (m_distancePredicted - m_distancePassed), m_currentHeight * unitSize, 0.0f), Quaternion.identity);
+                    slope.uphill = true;
+                    BlockController block = slope.GetComponent<BlockController>();
+                    block.game = game;
+                    block.width = blockWidth;
+                    block.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f) * blockWidth;
+
+                    moduleSize = (float)blockWidth * unitSize;
+                    m_currentHeight += blockWidth;
+                }
+                break;
+
+            case ModuleType.Downhill:
+                {
+                    int blockWidth = UnityEngine.Random.Range(minDownhillWidth, maxDownhillWidth);
+                    blockWidth = Mathf.Min(blockWidth, maxHeight - m_currentHeight);
+                    /*int minHeightRange = Mathf.Max(m_currentHeight - minLowerDiff, minHeight);
+                    int maxHeightRange = Mathf.Min(m_currentHeight + maxUpperDiff, maxHeight);
+                    int blockHeight = UnityEngine.Random.Range(minHeightRange, maxHeightRange);
+                    m_currentHeight = blockHeight;*/
+
+                    SlopeController slope = (SlopeController)Instantiate(slopePrefab, new Vector3(m_viewportStart + (m_distancePredicted - m_distancePassed), m_currentHeight * unitSize, 0.0f), Quaternion.identity);
+                    BlockController block = slope.GetComponent<BlockController>();
+                    block.game = game;
+                    block.width = blockWidth;
+                    block.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f) * blockWidth;
+
+                    moduleSize = (float)blockWidth * unitSize;
+                    m_currentHeight -= blockWidth;
                 }
                 break;
         }
 
         m_distancePredicted += moduleSize;
         m_previousModuleType = nextModule;
+    }
+
+    ModuleType PickNextModuleType(ModuleType _previousModuleType)
+    {
+        float[] weights = new float[Enum.GetNames(typeof(ModuleType)).Length];
+
+        float totalWeights = 0.0f;
+        switch(_previousModuleType)
+        {
+            case ModuleType.Block:
+                {
+                    weights[(int)ModuleType.Block] = 0.0f;
+                    weights[(int)ModuleType.Gap] = gapWeight;
+                    weights[(int)ModuleType.Uphill] = 0.0f;
+                    weights[(int)ModuleType.Downhill] = m_currentHeight > (minDownhillWidth + minHeight) ? downhillWeight : 0.0f;
+                }
+                break;
+
+            case ModuleType.Gap:
+                {
+                    weights[(int)ModuleType.Block] = blockWeight;
+                    weights[(int)ModuleType.Gap] = 0.0f;
+                    weights[(int)ModuleType.Uphill] = (maxHeight - m_currentHeight) >= (minUphillWidth) ? uphillWeight : 0.0f;
+                    weights[(int)ModuleType.Downhill] = 0.0f;
+                }
+                break;
+
+            case ModuleType.Uphill:
+                {
+                    weights[(int)ModuleType.Block] = blockWeight;
+                    weights[(int)ModuleType.Gap] = 0.0f;
+                    weights[(int)ModuleType.Uphill] = 0.0f;
+                    weights[(int)ModuleType.Downhill] = 0.0f; // We may want to authorize downhill here, but I can already smell the tricky stuff
+                }
+                break;
+
+            case ModuleType.Downhill:
+                {
+                    weights[(int)ModuleType.Block] = 0.0f;
+                    weights[(int)ModuleType.Gap] = gapWeight;
+                    weights[(int)ModuleType.Uphill] = 0.0f;
+                    weights[(int)ModuleType.Downhill] = 0.0f;
+                }
+                break;
+        }
+
+        foreach (float weight in weights)
+            totalWeights += weight;
+
+        float choiceWeight = UnityEngine.Random.Range(0.0001f, totalWeights);
+        int choice = 0;
+        float workWeight = weights[0];
+        while (choiceWeight > workWeight)
+        {
+            ++choice;
+            workWeight += weights[choice];
+        }
+
+        return (ModuleType)choice;
     }
 
     int m_currentHeight = 0;
