@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public GameObject graphic;
     public float stepDownDistance = 0.5f;
 
+    public GameObject jumpSoundPrefab;
+
     public bool IsTouchingGround()
     {
         return m_touchingGround;
@@ -71,6 +73,8 @@ public class PlayerController : MonoBehaviour
 
         if (input.GetJumpInput() && IsTouchingGround())
         {
+            Instantiate(jumpSoundPrefab);
+
             m_touchingGround = false;
             m_verticalVelocity = jumpStrength;
         }

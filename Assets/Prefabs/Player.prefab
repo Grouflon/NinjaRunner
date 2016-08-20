@@ -92,6 +92,7 @@ MonoBehaviour:
   game: {fileID: 0}
   graphic: {fileID: 165408}
   stepDownDistance: 0.5
+  jumpSoundPrefab: {fileID: 153870, guid: a3f54c0af30c576419706d48bf981543, type: 2}
 --- !u!212 &21266646
 SpriteRenderer:
   m_ObjectHideFlags: 1
