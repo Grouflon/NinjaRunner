@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
 {
     public float gameSpeed = 5.0f;
     public float acceleration = 0.1f;
+    public float gravity = -15.0f;
     public Text scoreText;
 
 	void Start ()
@@ -24,7 +25,7 @@ public class GameController : MonoBehaviour
 
     void OnPlayerDied()
     {
-        //SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Main");
     }
 
     private float m_totalDistance = 0.0f;

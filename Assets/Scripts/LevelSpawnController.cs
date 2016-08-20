@@ -115,7 +115,8 @@ public class LevelSpawnController : MonoBehaviour
             case ModuleType.Uphill:
                 {
                     int blockWidth = UnityEngine.Random.Range(minUphillWidth, maxUphillWidth);
-                    blockWidth = Mathf.Min(blockWidth, m_currentHeight - minHeight);
+                    blockWidth = Mathf.Min(blockWidth, maxHeight - m_currentHeight);
+
                     int minHeightRange = Mathf.Max(m_currentHeight - minLowerDiff, minHeight);
                     int maxHeightRange = Mathf.Min(m_currentHeight + maxUpperDiff, maxHeight - blockWidth);
                     int blockHeight = UnityEngine.Random.Range(minHeightRange, maxHeightRange);
@@ -136,7 +137,7 @@ public class LevelSpawnController : MonoBehaviour
             case ModuleType.Downhill:
                 {
                     int blockWidth = UnityEngine.Random.Range(minDownhillWidth, maxDownhillWidth);
-                    blockWidth = Mathf.Min(blockWidth, maxHeight - m_currentHeight);
+                    blockWidth = Mathf.Min(blockWidth, m_currentHeight - minHeight);
                     /*int minHeightRange = Mathf.Max(m_currentHeight - minLowerDiff, minHeight);
                     int maxHeightRange = Mathf.Min(m_currentHeight + maxUpperDiff, maxHeight);
                     int blockHeight = UnityEngine.Random.Range(minHeightRange, maxHeightRange);

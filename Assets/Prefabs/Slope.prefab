@@ -14,7 +14,7 @@ GameObject:
   - 60: {fileID: 6024896}
   - 50: {fileID: 5017186}
   - 114: {fileID: 11441468}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Slope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
