@@ -5,14 +5,17 @@ using System.Collections;
 
 public class GameController : MonoBehaviour
 {
-    public float gameSpeed = 5.0f;
+    public float startingSpeed = 6.0f;
     public float acceleration = 0.1f;
     public float gravity = -15.0f;
     public Text scoreText;
 
-	void Start ()
-	{
+    [HideInInspector]
+    public float gameSpeed = 5.0f;
 
+    void Start ()
+	{
+        gameSpeed = startingSpeed;
     }
 
     void Update ()

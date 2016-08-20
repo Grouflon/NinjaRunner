@@ -13,6 +13,7 @@ public class LevelSpawnController : MonoBehaviour
     public int maxBlockWidth = 12;
     public int minGapWidth = 3;
     public int maxGapWidth = 5;
+    public float gapWidthSpeedMultiplier = 1.0f;
     public int maxUpperDiff = 3;
     public int minLowerDiff = 5;
     public int minHeight = 1;
@@ -83,7 +84,8 @@ public class LevelSpawnController : MonoBehaviour
         {
             case ModuleType.Gap:
                 {
-                    int gapWidth = UnityEngine.Random.Range(minGapWidth, maxGapWidth);
+                    float ratio = (game.gameSpeed / game.startingSpeed);
+                    int gapWidth = UnityEngine.Random.Range(Mathf.FloorToInt((float)minGapWidth * ratio), Mathf.FloorToInt((float)maxGapWidth * ratio));
 
                     moduleSize = (float)gapWidth * unitSize;
                 }

@@ -479,22 +479,23 @@ MonoBehaviour:
   blockPrefab: {fileID: 11482152, guid: 4958dd3288f944044acd29e5cebb9255, type: 2}
   slopePrefab: {fileID: 11460388, guid: 8846a37e93ad6de409e27a91e2efd151, type: 2}
   unitSize: 1
-  minBlockWidth: 10
+  minBlockWidth: 3
   maxBlockWidth: 20
-  minGapWidth: 3
-  maxGapWidth: 5
-  maxUpperDiff: 3
+  minGapWidth: 2
+  maxGapWidth: 4
+  gapWidthSpeedMultiplier: 1
+  maxUpperDiff: 2
   minLowerDiff: 5
-  minHeight: 1
-  maxHeight: 20
-  minUphillWidth: 1
-  maxUphillWidth: 2
+  minHeight: 2
+  maxHeight: 22
+  minUphillWidth: 2
+  maxUphillWidth: 7
   minDownhillWidth: 4
   maxDownhillWidth: 7
   blockWeight: 5
   gapWeight: 5
   uphillWeight: 5
-  downhillWeight: 5
+  downhillWeight: 7
 --- !u!1 &1322904320
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,10 +535,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8bcaf741672654d9d596c3aea63f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSpeed: 5
+  startingSpeed: 6
   acceleration: 0.2
   gravity: -40
   scoreText: {fileID: 1546987245}
+  gameSpeed: 5
 --- !u!1 &1339576737
 GameObject:
   m_ObjectHideFlags: 0
