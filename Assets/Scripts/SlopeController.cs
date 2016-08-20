@@ -11,6 +11,8 @@ public class SlopeController : MonoBehaviour
 
 	void Start ()
 	{
+        gameObject.tag = uphill ? "uphill" : "downhill";
+
         Mesh mesh = new Mesh();
         m_meshFilter = GetComponent<MeshFilter>();
         m_meshRenderer = GetComponent<MeshRenderer>();

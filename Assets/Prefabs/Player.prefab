@@ -92,7 +92,8 @@ MonoBehaviour:
   input: {fileID: 0}
   game: {fileID: 0}
   graphic: {fileID: 165408}
-  stepDownDistance: 0.5
+  stepDownDistance: 1
+  raycastUpperDistance: 0.5
   jumpSoundPrefab: {fileID: 153870, guid: a3f54c0af30c576419706d48bf981543, type: 2}
 --- !u!114 &11451782
 MonoBehaviour:
@@ -132,7 +133,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300004, guid: cdc9fde9eca9f184b914ceaf02be2138, type: 3}
+  m_Sprite: {fileID: 21300012, guid: eab8f8243ae751c449771d77c4f31463, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
