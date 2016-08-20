@@ -26,6 +26,7 @@ GameObject:
   - 4: {fileID: 454600}
   - 212: {fileID: 21266646}
   - 95: {fileID: 9506026}
+  - 114: {fileID: 11451782}
   m_Layer: 0
   m_Name: Graphic
   m_TagString: Untagged
@@ -93,6 +94,18 @@ MonoBehaviour:
   graphic: {fileID: 165408}
   stepDownDistance: 0.5
   jumpSoundPrefab: {fileID: 153870, guid: a3f54c0af30c576419706d48bf981543, type: 2}
+--- !u!114 &11451782
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca1dbc3dbae34d4e9f5954eeca7f0a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepGo: {fileID: 172760, guid: cc9a7ee2326824d45b4a580b8d4c8df7, type: 2}
 --- !u!212 &21266646
 SpriteRenderer:
   m_ObjectHideFlags: 1
