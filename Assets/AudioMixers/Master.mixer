@@ -28,6 +28,7 @@ AudioMixerController:
     - 50046c720ad0ec04fb956675ab2f842e
     - ed08b506884c34d43b26ab0e142ddfe1
     - 0c388c53d2bb9f74ab9bab6589e7c916
+    - fbb2fe60cc7406c4d8acbcb9654d114d
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500003}
@@ -114,7 +115,8 @@ AudioMixerGroupController:
   m_Name: '>> AMB'
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: cc0e607363e79b344b6961a0d2c3be8b
-  m_Children: []
+  m_Children:
+  - {fileID: 24375782}
   m_Volume: a8d824aeec8f7e444a27d28060f3a4ee
   m_Pitch: c3de030699e352d4ba065f73102b6041
   m_Effects:
@@ -206,6 +208,23 @@ AudioMixerGroupController:
   m_Pitch: 3ca3cb63786bd49439c9e454022494ab
   m_Effects:
   - {fileID: 24476598}
+  m_UserColorIndex: 7
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &24375782
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Birds
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: fbb2fe60cc7406c4d8acbcb9654d114d
+  m_Children: []
+  m_Volume: cd58485c3f2bf90489e84828d1e48dc3
+  m_Pitch: 0170e4acfa9217c4aab7d528e08a7fc3
+  m_Effects:
+  - {fileID: 24486616}
   m_UserColorIndex: 7
   m_Mute: 0
   m_Solo: 0
@@ -340,6 +359,19 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &24486616
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 846b580cda070ad438bb7ce2ed160777
+  m_EffectName: Attenuation
+  m_MixLevel: 67812bb6c1130ef409648c1e623ec988
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!245 &24500003
 AudioMixerSnapshotController:
   m_ObjectHideFlags: 0
@@ -354,6 +386,7 @@ AudioMixerSnapshotController:
     1f71ff6715854c3419af60852b520875: -80
     80ffbd58d56965443bffcd36802e11b4: -2.5738313
     2ee232b83418fb4419ceae0fd52e3f4f: 0.025578512
+    cd58485c3f2bf90489e84828d1e48dc3: -6.133707
   m_TransitionOverrides: {}
 --- !u!245 &24549634
 AudioMixerSnapshotController:
@@ -369,6 +402,7 @@ AudioMixerSnapshotController:
     1f71ff6715854c3419af60852b520875: -2.647181
     80ffbd58d56965443bffcd36802e11b4: -2.5738313
     2ee232b83418fb4419ceae0fd52e3f4f: -5.824182
+    cd58485c3f2bf90489e84828d1e48dc3: -5.7224774
   m_TransitionOverrides: {}
 --- !u!245 &24578806
 AudioMixerSnapshotController:
@@ -384,4 +418,5 @@ AudioMixerSnapshotController:
     1f71ff6715854c3419af60852b520875: -2.647181
     80ffbd58d56965443bffcd36802e11b4: -3.1841109
     2ee232b83418fb4419ceae0fd52e3f4f: -0.102314346
+    cd58485c3f2bf90489e84828d1e48dc3: -5.7224774
   m_TransitionOverrides: {}
