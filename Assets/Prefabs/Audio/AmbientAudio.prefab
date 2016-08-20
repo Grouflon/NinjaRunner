@@ -55,7 +55,7 @@ MonoBehaviour:
   minInitialDelay: 1
   maxInitialDelay: 3
   minSpawnTime: 1
-  maxSpawnTime: 10
+  maxSpawnTime: 4
   maxRandomRadius: 0.8
 --- !u!1001 &100100000
 Prefab:
