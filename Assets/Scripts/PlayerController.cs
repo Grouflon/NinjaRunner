@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
 
         // TODO: if the point collision is too hardcore, maybe spherecast and some projection on slopes since we know their angle
         RaycastHit2D hit = Physics2D.Raycast(new Vector2(position.x, position.y + raycastUpperDistance), Vector2.down, 100.0f, LayerMask.GetMask("Ground"));
+
         if (hit.collider == null)
         {
             m_touchingGround = false;
@@ -44,7 +45,11 @@ public class PlayerController : MonoBehaviour
         {
             if (m_touchingGround)
             {
-                if (hit.collider.gameObject.tag != "downhill")
+                if (hit.collider.gameObject.tag == "downhill")
+                {
+                    m_sliding = true;
+                }
+                else
                 {
                     m_sliding = false;
                 }
@@ -62,6 +67,8 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                m_sliding = false;
+
                 if (hit.point.y > position.y)
                 {
                     m_touchingGround = true;
@@ -71,6 +78,11 @@ public class PlayerController : MonoBehaviour
                     if (hit.collider.gameObject.tag == "downhill")
                     {
                         m_sliding = true;
+                    }
+
+                    if (hit.collider.gameObject.tag != "downhill" && hit.collider.gameObject.tag != "uphill" && position.y < m_jumpStartHeight)
+                    {
+                        m_needRoll = true;
                     }
                 }
             }
@@ -86,6 +98,14 @@ public class PlayerController : MonoBehaviour
         m_animator.SetBool("IsTouchingGround", IsTouchingGround());
         m_animator.SetBool("IsSliding", m_sliding);
         m_animator.SetFloat("SpeedRatio", Mathf.Min(game.gameSpeed / cruiseSpeed, 1.0f));
+        if (m_needRoll)
+        {
+            m_animator.SetTrigger("Roll");
+        }
+        else
+        {
+            m_animator.ResetTrigger("Roll");
+        }
 
         if (input.GetJumpInput() && IsTouchingGround())
         {
@@ -93,16 +113,21 @@ public class PlayerController : MonoBehaviour
 
             m_touchingGround = false;
             m_verticalVelocity = jumpStrength;
+            m_jumpStartHeight = transform.position.y;
         }
 
         if (transform.position.y < -10.0f)
         {
             game.SendMessage("OnPlayerDied");
         }
+
+        m_needRoll = false;
 	}
 
     float m_verticalVelocity = 0.0f;
+    float m_jumpStartHeight = 100.0f;
     Animator m_animator;
     bool m_touchingGround = false;
     bool m_sliding = false;
+    bool m_needRoll = false;
 }
