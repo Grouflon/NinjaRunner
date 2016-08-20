@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
 
     void Start ()
 	{
+        MusicController.instance.game = this;
         gameSpeed = startingSpeed;
     }
 
