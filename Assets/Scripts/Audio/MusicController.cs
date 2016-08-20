@@ -6,7 +6,6 @@ public class MusicController : MonoBehaviour
     [SerializeField]
     private GameObject musicLayers;
     private AudioSource source;
-    private bool syncPointReached = false;
     private int syncPointSample = 2822400;
 
     public static MusicController instance;
@@ -28,7 +27,7 @@ public class MusicController : MonoBehaviour
         InstantiateMusic();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (source.timeSamples >= syncPointSample)
             InstantiateMusic();

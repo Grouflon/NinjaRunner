@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 448732}
+  - 114: {fileID: 11491980}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -27,6 +28,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11491980
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7dbc95ae1bb6794d8f904dffea242ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicLayers: {fileID: 198878, guid: 1a120a03b4bea9e4a9d7dbcf3d9d4ec1, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -327,7 +327,13 @@ MonoBehaviour:
   acc: 0.015
   predictionTime: 1.5
   showPrediction: 0
---- !u!1001 &617893384
+--- !u!114 &711865297 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11434428, guid: 5ece3b41e389b484ab46d8a84c54655e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1396590105}
+  m_Script: {fileID: 11500000, guid: 40cbd45d9109e3b4dabc5124d713a629, type: 3}
+--- !u!1001 &951214478
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -369,12 +375,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0bbafaacfd4f7d54fb1c81d91cb1f6c2, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &711865297 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11434428, guid: 5ece3b41e389b484ab46d8a84c54655e,
-    type: 2}
-  m_PrefabInternal: {fileID: 1396590105}
-  m_Script: {fileID: 11500000, guid: 40cbd45d9109e3b4dabc5124d713a629, type: 3}
 --- !u!1 &1097878989
 GameObject:
   m_ObjectHideFlags: 0
