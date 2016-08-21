@@ -120,8 +120,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 43e09c9b5ae920645abd13cccac2703d, type: 3}
   - {fileID: 8300000, guid: 486f381e3e4112f47ae7fdbeed98958d, type: 3}
   - {fileID: 8300000, guid: c1d317429702ccc4a85555d89bf554a3, type: 3}
-  minVolume: 0.1
-  maxVolume: 0.9
+  minVolume: 0.3
+  maxVolume: 1
   minPitch: 0.8
   maxPitch: 1.2
   probability: 1
