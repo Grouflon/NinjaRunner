@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
 
     public float blackoutTime = 0.5f;
     public RawImage blackout;
+    public float gameOverDuration = 2.0f;
 
     public float GetGameSpeed()
     {
@@ -45,6 +46,12 @@ public class GameController : MonoBehaviour
 
     void Update ()
 	{
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+            return;
+        }
+
         if (Time.timeSinceLevelLoad < blackoutTime)
         {
             Color c = blackout.color;
@@ -69,7 +76,7 @@ public class GameController : MonoBehaviour
         // RESTART REQUEST
         if (m_gameOver)
         {
-            if (Input.anyKeyDown)
+            if (!m_restartRequired && (Input.anyKeyDown || (Time.time - m_gameOverTime) > gameOverDuration))
             {
                 m_restartRequired = true;
                 m_restartRequestTime = Time.timeSinceLevelLoad;
@@ -155,7 +162,7 @@ public class GameController : MonoBehaviour
         go.transform.parent = AmbientAudioController.instance.gameObject.transform;
 
         m_gameOver = true;
-        //SceneManager.LoadScene("Main");
+        m_gameOverTime = Time.time;
     }
 
     void BumpScore()
@@ -196,4 +203,5 @@ public class GameController : MonoBehaviour
     private bool m_gameOver = false;
     private bool m_restartRequired = false;
     private float m_restartRequestTime;
+    private float m_gameOverTime = 0.0f;
 }

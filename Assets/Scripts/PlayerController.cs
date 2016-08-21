@@ -149,6 +149,8 @@ public class PlayerController : MonoBehaviour
 	
 	void Update ()
 	{
+        if (m_dead)
+            return;
         // JUMP / INPUT
         /*if (input.GetJumpInput() && IsTouchingGround())
         {
@@ -198,6 +200,8 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y < -10.0f)
         {
             game.SendMessage("OnPlayerDied");
+            m_dead = true;
+            return;
         }
 
         // RESET
@@ -237,4 +241,5 @@ public class PlayerController : MonoBehaviour
     bool m_isPressingJump = false;
 
     float m_outStepDownTimer = 0.0f;
+    bool m_dead = false;
 }
