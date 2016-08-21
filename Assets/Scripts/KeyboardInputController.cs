@@ -8,4 +8,9 @@ public class KeyboardInputController : InputController
     {
         return Input.anyKeyDown;
     }
+
+    public override bool IsJumping()
+    {
+        return Input.anyKey;
+    }
 }

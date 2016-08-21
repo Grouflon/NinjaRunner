@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public GameObject graphic;
     public float stepDownDistance = 0.5f;
     public float raycastUpperDistance = 0.5f;
+    public float jumpControlTime = 1.0f;
 
     public GameObject jumpSoundPrefab;
 
@@ -27,10 +28,26 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 position = transform.position;
 
-        if (!m_touchingGround)
+        float gravityDt = _dt;
+        if (m_isPressingJump && !IsTouchingGround() && m_jumpControlTimer <= jumpControlTime)
         {
-            m_verticalVelocity += game.gravity * _dt;
-            position.y += m_verticalVelocity * _dt;
+            m_verticalVelocity = jumpStrength;
+
+            if (jumpControlTime - m_jumpControlTimer <= _dt)
+            {
+                gravityDt = _dt - (jumpControlTime - m_jumpControlTimer);
+            }
+            m_jumpControlTimer += _dt;
+        }
+
+        if (!m_touchingGround && !m_isPressingJump || m_jumpControlTimer > jumpControlTime)
+        {
+            m_verticalVelocity += game.gravity * gravityDt;
+        }
+
+        if (!IsTouchingGround())
+        {
+            position.y += m_verticalVelocity * gravityDt;
         }
 
         // TODO: if the point collision is too hardcore, maybe spherecast and some projection on slopes since we know their angle
@@ -93,8 +110,36 @@ public class PlayerController : MonoBehaviour
 	
 	void Update ()
 	{
+        // JUMP / INPUT
+        /*if (input.GetJumpInput() && IsTouchingGround())
+        {
+            Instantiate(jumpSoundPrefab);
+
+            m_touchingGround = false;
+            m_verticalVelocity = jumpStrength;
+            m_jumpStartHeight = transform.position.y;
+        }*/
+
+        if (IsTouchingGround() && !m_isPressingJump && input.IsJumping())
+        {
+            Instantiate(jumpSoundPrefab);
+
+            m_isPressingJump = true;
+            m_touchingGround = false;
+            m_jumpStartHeight = transform.position.y;
+            m_verticalVelocity = 0.0f;
+        }
+
+        if (m_isPressingJump && !input.IsJumping())
+        {
+            m_isPressingJump = false;
+            m_jumpControlTimer = 0.0f;
+
+        }
+
         UpdatePosition(Time.deltaTime);
 
+        // ANIMATOR
         m_animator.SetBool("IsTouchingGround", IsTouchingGround());
         m_animator.SetBool("IsSliding", m_sliding);
         m_animator.SetFloat("SpeedRatio", Mathf.Min(game.gameSpeed / cruiseSpeed, 1.0f));
@@ -106,21 +151,14 @@ public class PlayerController : MonoBehaviour
         {
             m_animator.ResetTrigger("Roll");
         }
-
-        if (input.GetJumpInput() && IsTouchingGround())
-        {
-            Instantiate(jumpSoundPrefab);
-
-            m_touchingGround = false;
-            m_verticalVelocity = jumpStrength;
-            m_jumpStartHeight = transform.position.y;
-        }
-
+        
+        // EVENTS
         if (transform.position.y < -10.0f)
         {
             game.SendMessage("OnPlayerDied");
         }
 
+        // RESET
         m_needRoll = false;
 	}
 
@@ -130,4 +168,7 @@ public class PlayerController : MonoBehaviour
     bool m_touchingGround = false;
     bool m_sliding = false;
     bool m_needRoll = false;
+
+    float m_jumpControlTimer = 0.0f;
+    bool m_isPressingJump = false;
 }

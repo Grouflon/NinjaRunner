@@ -87,13 +87,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40cbd45d9109e3b4dabc5124d713a629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpStrength: 16
+  jumpStrength: 12
   cruiseSpeed: 7
   input: {fileID: 0}
   game: {fileID: 0}
   graphic: {fileID: 165408}
-  stepDownDistance: 1
+  stepDownDistance: 2
   raycastUpperDistance: 0.5
+  jumpControlTime: 0.2
   jumpSoundPrefab: {fileID: 153870, guid: a3f54c0af30c576419706d48bf981543, type: 2}
 --- !u!114 &11451782
 MonoBehaviour:

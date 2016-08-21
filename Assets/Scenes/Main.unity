@@ -583,7 +583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingSpeed: 6
   acceleration: 0.2
-  gravity: -40
+  gravity: -50
   scoreText: {fileID: 1546987245}
   gameSpeed: 5
 --- !u!1 &1339576737
@@ -725,10 +725,6 @@ Prefab:
       propertyPath: game
       value: 
       objectReference: {fileID: 1322904322}
-    - target: {fileID: 11434428, guid: 5ece3b41e389b484ab46d8a84c54655e, type: 2}
-      propertyPath: stepDownDistance
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ece3b41e389b484ab46d8a84c54655e, type: 2}
   m_IsPrefabParent: 0
