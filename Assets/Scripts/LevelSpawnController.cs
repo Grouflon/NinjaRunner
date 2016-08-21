@@ -60,6 +60,12 @@ public class LevelSpawnController : MonoBehaviour
 
         m_previousModuleType = ModuleType.Block;
         m_distancePredicted += blockWidth;
+
+        do
+        {
+            GenerateNewModule();
+        }
+        while (m_previousModuleType != ModuleType.Gap);
     }
 	
 	void FixedUpdate ()
@@ -68,9 +74,13 @@ public class LevelSpawnController : MonoBehaviour
         m_predictionDistance = Mathf.Ceil(m_viewportLength / unitSize) * unitSize;
 
 
-        while (m_distancePredicted < m_distancePassed + m_predictionDistance)
+        while (m_distancePredicted < m_distancePassed + m_predictionDistance )
         {
-            GenerateNewModule();
+            do
+            {
+                GenerateNewModule();
+            }
+            while (m_previousModuleType != ModuleType.Gap);
         }
 
         m_distancePassed += game.GetGameSpeed() * Time.fixedDeltaTime;
