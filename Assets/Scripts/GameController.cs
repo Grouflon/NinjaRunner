@@ -56,8 +56,26 @@ public class GameController : MonoBehaviour
         float t = Ease.QuintOut(Mathf.Clamp01(m_scoreBumpTimer / scoreBumpTime));
         scoreText.rectTransform.localScale = new Vector3(1.0f, 1.0f, 1.0f) * Mathf.Lerp(scoreBumpScale, 1.0f, t);
 
+        if (m_scoreEffect)
+        {
+            m_scoreEffect.GetComponent<RectTransform>().localScale = new Vector3(1.0f, 1.0f, 1.0f) * Mathf.Lerp(scoreBumpScale, scoreBumpScale * 3.0f, t);
+            Color color = m_scoreEffect.GetComponent<Text>().color;
+            color.a = Mathf.Lerp(1.0f, 0.0f, t);
+            m_scoreEffect.GetComponent<Text>().color = color;
+        }
+
         if (m_scoreBumpTimer < scoreBumpTime)
+        {
             m_scoreBumpTimer += Time.deltaTime;
+        }
+        else
+        {
+            if (m_scoreEffect)
+            {
+                Destroy(m_scoreEffect);
+                m_scoreEffect = null;
+            }
+        }
     }
 
     public void OnNiceLanding()
@@ -75,7 +93,16 @@ public class GameController : MonoBehaviour
 
     void BumpScore()
     {
+        if (m_scoreEffect)
+        {
+            Destroy(m_scoreEffect);
+            m_scoreEffect = null;
+        }
+
         m_scoreBumpTimer = 0.0f;
+        m_scoreEffect = (GameObject)Instantiate(scoreText.gameObject);
+        m_scoreEffect.GetComponent<RectTransform>().SetParent(scoreText.rectTransform.parent, false);
+        Destroy(m_scoreEffect, scoreBumpTime);
     }
 
     void SpeedBoost(float _boost)
@@ -84,6 +111,8 @@ public class GameController : MonoBehaviour
         m_speedBoostReference = m_speedBoost;
         m_speedBoostTimer = 0.0f;
     }
+
+    private GameObject m_scoreEffect;
 
     private float m_gameSpeed = 5.0f;
     private float m_speedBoost = 0.0f;

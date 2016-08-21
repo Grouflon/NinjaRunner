@@ -593,7 +593,7 @@ MonoBehaviour:
   gravity: -50
   scoreText: {fileID: 1546987245}
   scoreBumpScale: 1.4
-  scoreBumpTime: 0.3
+  scoreBumpTime: 0.5
 --- !u!1 &1339576737
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,7 +811,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -31.3, y: -17.1}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 199, y: 200}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1546987245
 MonoBehaviour:
