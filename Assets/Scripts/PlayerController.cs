@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public float jumpControlTime = 1.0f;
 
     public GameObject jumpSoundPrefab;
+    public GameObject jumpVoxSoundPrefab;
 
     public bool IsTouchingGround()
     {
@@ -153,6 +154,7 @@ public class PlayerController : MonoBehaviour
         if (IsTouchingGround() && !m_isPressingJump && input.IsJumping())
         {
             Instantiate(jumpSoundPrefab);
+            Instantiate(jumpVoxSoundPrefab);
 
             m_isPressingJump = true;
             m_touchingGround = false;
