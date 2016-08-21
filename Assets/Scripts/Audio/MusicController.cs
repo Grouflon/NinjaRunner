@@ -39,12 +39,12 @@ public class MusicController : MonoBehaviour
 
     void Start()
     {
-        InstantiateMusic();
+        StartCoroutine(DelayStartMusic());
     }
 
     void FixedUpdate()
     {
-        if (source.timeSamples >= syncPointSample)
+        if (source != null && source.timeSamples >= syncPointSample)
             InstantiateMusic();
     }
 
@@ -68,6 +68,12 @@ public class MusicController : MonoBehaviour
             snapshots[2].TransitionTo(musicFadeTime);
             currentSnapshot = snapshots[2];
         }
+    }
+
+    IEnumerator DelayStartMusic()
+    {
+        yield return new WaitForSeconds(3f);
+        InstantiateMusic();
     }
 
     void InstantiateMusic()
