@@ -98,6 +98,7 @@ MonoBehaviour:
   raycastUpperDistance: 0.5
   jumpControlTime: 0.2
   jumpSoundPrefab: {fileID: 153870, guid: a3f54c0af30c576419706d48bf981543, type: 2}
+  jumpVoxSoundPrefab: {fileID: 107296, guid: d2e79ccd357f8ee47bd9f0d3e9072008, type: 2}
 --- !u!114 &11451782
 MonoBehaviour:
   m_ObjectHideFlags: 1
