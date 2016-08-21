@@ -18,6 +18,7 @@ public class LevelSpawnController : MonoBehaviour
     public int minLowerDiff = 5;
     public int minHeight = 1;
     public int maxHeight = 20;
+    public int startHeight = 4;
 
     public int minUphillWidth = 1;
     public int maxUphillWidth = 2;
@@ -47,7 +48,7 @@ public class LevelSpawnController : MonoBehaviour
         m_viewportLength = m_viewportEnd - m_viewportStart;
         m_predictionDistance = Mathf.Ceil(m_viewportLength / unitSize) * unitSize;
 
-        m_currentHeight = minHeight;
+        m_currentHeight = startHeight;
 
         float blockWidth = m_predictionDistance;
         BlockController block = (BlockController)Instantiate(blockPrefab, new Vector3(m_viewportStart, m_currentHeight * unitSize, 0.0f), Quaternion.identity);

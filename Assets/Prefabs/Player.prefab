@@ -91,8 +91,10 @@ MonoBehaviour:
   cruiseSpeed: 7
   input: {fileID: 0}
   game: {fileID: 0}
+  level: {fileID: 0}
   graphic: {fileID: 165408}
   stepDownDistance: 2
+  outStepDownTime: 0.03
   raycastUpperDistance: 0.5
   jumpControlTime: 0.2
   jumpSoundPrefab: {fileID: 153870, guid: a3f54c0af30c576419706d48bf981543, type: 2}

@@ -14,14 +14,20 @@ public class CameraController : MonoBehaviour
 	{
         m_camera = GetComponent<Camera>();
         m_minCameraHeight = transform.position.y;
-        m_targetHeight = level.minHeight * level.unitSize; // rely on my knowledge of other scripts. not good
+        m_targetHeight = level.startHeight * level.unitSize;
+
+        Vector3 position = transform.position;
+        position.y = m_targetHeight;
+        transform.position = position;
     }
 	
 	void Update ()
 	{
+        m_viewportHeight = Mathf.Abs(m_camera.ViewportToWorldPoint(new Vector3(0.0f, 1.0f, 0.0f)).y - m_camera.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, 0.0f)).y);
+
         float minPlayerHeight = level.minHeight * level.unitSize;
         float maxPlayerHeight = level.maxHeight * level.unitSize;
-        float maxCameraHeight = maxPlayerHeight + 4 * level.unitSize - m_camera.ViewportToWorldPoint(new Vector3(0.0f, 1.0f, 0.0f)).y;
+        float maxCameraHeight = maxPlayerHeight + 4 * level.unitSize - m_viewportHeight;
 
         float predictionDistance = Mathf.Min(predictionTime * game.gameSpeed, m_camera.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, 0.0f)).x - player.transform.position.x - 0.5f);
 
@@ -31,7 +37,8 @@ public class CameraController : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(player.transform.position + new Vector3(predictionDistance, 50.0f, 0.0f), new Vector2(0.0f, -1.0f), 100.0f, LayerMask.GetMask("Ground"));
         if (hit.collider != null)
         {
-            m_targetHeight = hit.point.y;
+            if (hit.collider.gameObject.tag != "uphill" || hit.point.y >= m_targetHeight)
+                m_targetHeight = hit.point.y;
         }
 
         float wantedRatio = Mathf.Clamp01((m_targetHeight - minPlayerHeight) / (maxPlayerHeight - minPlayerHeight));
@@ -42,6 +49,7 @@ public class CameraController : MonoBehaviour
         transform.position = position;
     }
 
+    float m_viewportHeight;
     float m_targetHeight;
     float m_minCameraHeight;
     Camera m_camera;

@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float cruiseSpeed = 20.0f;
     public InputController input;
     public GameController game;
+    public LevelSpawnController level;
     public GameObject graphic;
     public float stepDownDistance = 0.5f;
     public float outStepDownTime = 0.02f;
@@ -23,6 +24,10 @@ public class PlayerController : MonoBehaviour
 	void Start ()
 	{
         m_animator = graphic.GetComponent<Animator>();
+
+        Vector3 position = transform.position;
+        position.y = level.startHeight * level.unitSize;
+        transform.position = position;
 	}
 
     void UpdatePosition(float _dt)
@@ -56,8 +61,20 @@ public class PlayerController : MonoBehaviour
 
         if (hit.collider == null)
         {
-            m_touchingGround = false;
-            m_sliding = false;
+            if (m_touchingGround)
+            {
+                if (m_outStepDownTimer > outStepDownTime)
+                {
+                    m_touchingGround = false;
+                    m_sliding = false;
+                    m_outStepDownTimer = 0.0f;
+                }
+                else
+                {
+                    m_verticalVelocity = 0.0f;
+                    m_outStepDownTimer += _dt;
+                }
+            }
         }
         else
         {
@@ -175,7 +192,7 @@ public class PlayerController : MonoBehaviour
 	}
 
     float m_verticalVelocity = 0.0f;
-    float m_jumpStartHeight = 100.0f;
+    float m_jumpStartHeight = 0.0f;
     Animator m_animator;
     bool m_touchingGround = false;
     bool m_sliding = false;

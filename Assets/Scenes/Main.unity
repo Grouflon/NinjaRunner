@@ -326,7 +326,7 @@ MonoBehaviour:
   game: {fileID: 1322904322}
   acc: 0.015
   predictionTime: 1.5
-  showPrediction: 0
+  showPrediction: 1
 --- !u!114 &711865297 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11434428, guid: 5ece3b41e389b484ab46d8a84c54655e,
@@ -534,6 +534,7 @@ MonoBehaviour:
   minLowerDiff: 5
   minHeight: 2
   maxHeight: 22
+  startHeight: 8
   minUphillWidth: 2
   maxUphillWidth: 7
   minDownhillWidth: 4
@@ -725,6 +726,10 @@ Prefab:
       propertyPath: game
       value: 
       objectReference: {fileID: 1322904322}
+    - target: {fileID: 11434428, guid: 5ece3b41e389b484ab46d8a84c54655e, type: 2}
+      propertyPath: level
+      value: 
+      objectReference: {fileID: 1298770730}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ece3b41e389b484ab46d8a84c54655e, type: 2}
   m_IsPrefabParent: 0
