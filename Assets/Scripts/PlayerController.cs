@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private LoopAudioPlayer slideLoopPlayer;
 
     public GameObject groundImpactPrefab;
-    private bool groundImpactSfxHasPlayed = false;
+    private bool groundImpactSfxHasPlayed = true;
 
     public bool IsTouchingGround()
     {
@@ -229,7 +229,7 @@ public class PlayerController : MonoBehaviour
     float m_verticalVelocity = 0.0f;
     float m_jumpStartHeight = 0.0f;
     Animator m_animator;
-    bool m_touchingGround = false;
+    bool m_touchingGround = true;
     bool m_sliding = false;
     bool m_needRoll = false;
 

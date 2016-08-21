@@ -26,6 +26,9 @@ public class GameController : MonoBehaviour
     public GameObject boostSfx;
     public GameObject deathSfx;
 
+    public float blackoutTime = 0.5f;
+    public RawImage blackout;
+
     public float GetGameSpeed()
     {
         return m_gameSpeed + m_speedBoost;
@@ -42,6 +45,37 @@ public class GameController : MonoBehaviour
 
     void Update ()
 	{
+        if (Time.timeSinceLevelLoad < blackoutTime)
+        {
+            Color c = blackout.color;
+            c.a = Mathf.Lerp(1f, 0f, Ease.QuadIn(Time.timeSinceLevelLoad / blackoutTime));
+            blackout.color = c;
+        }
+
+        if (m_restartRequired)
+        {
+            float time = Time.timeSinceLevelLoad - m_restartRequestTime;
+            Color c = blackout.color;
+            c.a = Mathf.Lerp(0f, 1f, Ease.QuadIn(time / blackoutTime));
+            blackout.color = c;
+
+            if (time > blackoutTime)
+            {
+                // RESTART
+                SceneManager.LoadScene("Main");
+            }
+        }
+
+        // RESTART REQUEST
+        if (m_gameOver)
+        {
+            if (Input.anyKeyDown)
+            {
+                m_restartRequired = true;
+                m_restartRequestTime = Time.timeSinceLevelLoad;
+            }
+        }
+
         if (m_speedBoost > 0.0f)
         {
             if (m_speedBoostTimer > speedBoostTime)
@@ -73,8 +107,11 @@ public class GameController : MonoBehaviour
             m_speedBoostTimer += Time.deltaTime;
         }
 
-        m_totalDistance += GetGameSpeed() * Time.deltaTime;
-        m_gameSpeed += acceleration * Time.deltaTime;
+        if (!m_gameOver)
+        {
+            m_totalDistance += GetGameSpeed() * Time.deltaTime;
+            m_gameSpeed += acceleration * Time.deltaTime;
+        }
 
         scoreText.text = m_totalDistance.ToString("0");
 
@@ -117,7 +154,8 @@ public class GameController : MonoBehaviour
         GameObject go = (GameObject)Instantiate(deathSfx, new Vector3(0, 0, 0), Quaternion.identity);
         go.transform.parent = AmbientAudioController.instance.gameObject.transform;
 
-        SceneManager.LoadScene("Main");
+        m_gameOver = true;
+        //SceneManager.LoadScene("Main");
     }
 
     void BumpScore()
@@ -154,4 +192,8 @@ public class GameController : MonoBehaviour
     private float m_scoreBumpTimer = 0.0f;
     private float m_playerStartPosition = 0.0f;
     private float m_playerBoostStartPosition = 0.0f;
+
+    private bool m_gameOver = false;
+    private bool m_restartRequired = false;
+    private float m_restartRequestTime;
 }
