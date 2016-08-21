@@ -24,10 +24,6 @@ public class ScrollingBackdrop : MonoBehaviour
 
 
         offset.y = camera.GetCurrentHeightRatio() * maxTextureOffset;
-
-        Debug.Log(offset.y);
-
-
         m_material.mainTextureOffset = offset;
 	}
 
