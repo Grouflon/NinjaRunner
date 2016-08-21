@@ -2248,6 +2248,7 @@ MonoBehaviour:
   scoreBumpTime: 0.5
   player: {fileID: 711865297}
   boostSfx: {fileID: 169284, guid: c292b5cec2157084ea7489513128bea6, type: 2}
+  deathSfx: {fileID: 135202, guid: 7537c19df55edce4b967072f21ecdedf, type: 2}
 --- !u!1 &1339576737
 GameObject:
   m_ObjectHideFlags: 0
