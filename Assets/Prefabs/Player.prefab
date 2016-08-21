@@ -111,6 +111,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   footstepGo: {fileID: 172760, guid: cc9a7ee2326824d45b4a580b8d4c8df7, type: 2}
+  rollGo: {fileID: 128336, guid: c923053511d41f54887ea3f7b85504ff, type: 2}
+  voiceGo: {fileID: 107296, guid: d2e79ccd357f8ee47bd9f0d3e9072008, type: 2}
 --- !u!212 &21266646
 SpriteRenderer:
   m_ObjectHideFlags: 1
