@@ -17,9 +17,13 @@ public class PlayerController : MonoBehaviour
     [Header ("Audio Stuff")]
     public GameObject jumpSoundPrefab;
     public GameObject jumpVoxSoundPrefab;
+
     public GameObject slideSoundPrefab;
     private bool slideSfxHasPlayed = false;
     private LoopAudioPlayer slideLoopPlayer;
+
+    public GameObject groundImpactPrefab;
+    private bool groundImpactSfxHasPlayed = false;
 
     public bool IsTouchingGround()
     {
@@ -158,6 +162,7 @@ public class PlayerController : MonoBehaviour
         if (IsTouchingGround() && !m_isPressingJump && input.IsJumping())
         {
             Instantiate(jumpSoundPrefab);
+            groundImpactSfxHasPlayed = false;
             Instantiate(jumpVoxSoundPrefab);
 
             m_isPressingJump = true;
@@ -210,6 +215,14 @@ public class PlayerController : MonoBehaviour
         {
             slideSfxHasPlayed = false;
             slideLoopPlayer.Stop();
+        }
+
+        // GROUND IMPACT SFX
+        if (m_touchingGround && !groundImpactSfxHasPlayed)
+        {
+            groundImpactSfxHasPlayed = true;
+            GameObject slideSfxGo = (GameObject)Instantiate(groundImpactPrefab, this.gameObject.transform.position, Quaternion.identity);
+            slideSfxGo.transform.parent = this.gameObject.transform;
         }
 	}
 

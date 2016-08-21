@@ -23,7 +23,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 135172}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 9}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -45,8 +45,6 @@ MonoBehaviour:
   - {fileID: 24571124, guid: 1d2321a820244f647bbdd6c811f7f117, type: 2}
   - {fileID: 24541498, guid: 1d2321a820244f647bbdd6c811f7f117, type: 2}
   musicFadeTime: 3
-  lowMidCross: 10
-  midHighCross: 14
   currentSnapshot: {fileID: 0}
   game: {fileID: 0}
 --- !u!1001 &100100000
