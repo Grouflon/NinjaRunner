@@ -1365,7 +1365,7 @@ ParticleSystem:
     enabled: 0
     multiplier: 1
   ClampVelocityModule:
-    enabled: 1
+    enabled: 0
     x:
       scalar: 1
       maxCurve:
@@ -2171,12 +2171,15 @@ MonoBehaviour:
   niceLandingScore: 100
   speedBoostTime: 6
   speedBoostDecayTime: 4
+  speedBoostPlayerAdvance: 1.5
+  speedBoostPlayerAdvanceTime: 1
   startingSpeed: 6
   acceleration: 0.15
   gravity: -50
   scoreText: {fileID: 1546987245}
   scoreBumpScale: 1.4
   scoreBumpTime: 0.5
+  player: {fileID: 711865297}
 --- !u!1 &1339576737
 GameObject:
   m_ObjectHideFlags: 0
@@ -2417,11 +2420,11 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 9ec5d4a06f9722e4fa2293572073c20c, type: 3}
-    m_FontSize: 30
+    m_FontSize: 60
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
-    m_MaxSize: 40
+    m_MaxSize: 60
     m_Alignment: 2
     m_AlignByGeometry: 0
     m_RichText: 1

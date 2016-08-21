@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour
     public int niceLandingScore = 100;
     public float speedBoostTime = 4.0f;
     public float speedBoostDecayTime = 2.0f;
+    public float speedBoostPlayerAdvance = 2.0f;
+    public float speedBoostPlayerAdvanceTime = 0.5f;
 
 
     public float startingSpeed = 6.0f;
@@ -18,6 +20,8 @@ public class GameController : MonoBehaviour
 
     public float scoreBumpScale = 2.0f;
     public float scoreBumpTime = 0.5f;
+
+    public PlayerController player;
 
     public float GetGameSpeed()
     {
@@ -30,6 +34,7 @@ public class GameController : MonoBehaviour
         m_gameSpeed = startingSpeed;
 
         m_scoreBumpTimer = scoreBumpTime;
+        m_playerStartPosition = player.transform.position.x;
     }
 
     void Update ()
@@ -38,11 +43,28 @@ public class GameController : MonoBehaviour
         {
             if (m_speedBoostTimer > speedBoostTime)
             {
+                Vector3 position = player.transform.position;
+                position.x = m_playerStartPosition;
+
                 if (m_speedBoostTimer < speedBoostTime + speedBoostDecayTime)
                 {
                     m_speedBoost -= (Time.deltaTime / speedBoostDecayTime) * m_speedBoostReference;
                     m_speedBoost = Mathf.Max(m_speedBoost, 0.0f);
+
+                    float ratio = Mathf.Clamp01((m_speedBoostTimer - speedBoostTime) / speedBoostDecayTime);
+                    position.x = m_playerStartPosition + speedBoostPlayerAdvance * Ease.QuadOut(1.0f - ratio);
                 }
+
+                player.transform.position = position;
+            }
+            else
+            {
+                float ratio = Mathf.Clamp01(m_speedBoostPlayerAdvanceTimer / speedBoostPlayerAdvanceTime);
+                Vector3 position = player.transform.position;
+                position.x = Mathf.Lerp(m_playerBoostStartPosition, m_playerStartPosition + speedBoostPlayerAdvance, Ease.QuadInOut(ratio));
+                player.transform.position = position;
+
+                m_speedBoostPlayerAdvanceTimer += Time.deltaTime;
             }
 
             m_speedBoostTimer += Time.deltaTime;
@@ -110,6 +132,8 @@ public class GameController : MonoBehaviour
         m_speedBoost += _boost;
         m_speedBoostReference = m_speedBoost;
         m_speedBoostTimer = 0.0f;
+        m_speedBoostPlayerAdvanceTimer = 0.0f;
+        m_playerBoostStartPosition = player.transform.position.x;
     }
 
     private GameObject m_scoreEffect;
@@ -117,7 +141,10 @@ public class GameController : MonoBehaviour
     private float m_gameSpeed = 5.0f;
     private float m_speedBoost = 0.0f;
     private float m_speedBoostTimer = 0.0f;
+    private float m_speedBoostPlayerAdvanceTimer = 0.0f;
     private float m_speedBoostReference = 0.0f;
     private float m_totalDistance = 0.0f;
     private float m_scoreBumpTimer = 0.0f;
+    private float m_playerStartPosition = 0.0f;
+    private float m_playerBoostStartPosition = 0.0f;
 }

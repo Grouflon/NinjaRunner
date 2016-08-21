@@ -17,7 +17,6 @@ public class ParticlesController : MonoBehaviour
 
         for (int i = 0; i < _particles.Length; i++)
         {
-            //Debug.Log(_particles[i].velocity);
             _particles[i].velocity = new Vector3(_particles[i].velocity.x, _particles[i].velocity.y, game.GetGameSpeed() * 2.0f);
         }
 
