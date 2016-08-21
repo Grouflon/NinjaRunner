@@ -12,6 +12,9 @@ public class ModuleGroupController : MonoBehaviour
     public int m_blockSize = 0;
     public int m_downhillSize = 0;
 
+    /*public int tileRows = 0;
+    public int tileCols = 0;*/
+
     void Start ()
 	{
         /*SetUphillSize(4); //2
@@ -35,6 +38,39 @@ public class ModuleGroupController : MonoBehaviour
         int endX = d.width + (m_downhillSize == 0 ? 1 : 0);
         int startY = d.heightUpperDiff + 1;
         int endY = -startingHeight;
+
+
+        /*Mesh mesh = new Mesh();
+        int xSize = Mathf.Abs(startX - endX);
+        int ySize = Mathf.Abs(endY - startY - 1);
+        m_vertices = new Vector3[xSize * ySize * 4];
+        m_uv = new Vector2[xSize * ySize * 4];
+        int[] indices = new int[xSize * ySize * 6];
+
+        float uvXUnit = 1.0f / (float)tileRows;
+        float uvYUnit = 1.0f / (float)tileCols;
+
+        for (int y = 0; y < ySize; ++y)
+        {
+            float ay = startY - y;
+            for (int x = 0; x < xSize; ++x)
+            {
+                float ax = x + startX;
+
+
+                m_vertices[(y * xSize + x) * 4 + 0] = new Vector3(ax * level.unitSize, ay * level.unitSize);
+                m_vertices[(y * xSize + x) * 4 + 1] = new Vector3((ax + 1) * level.unitSize, ay * level.unitSize);
+                m_vertices[(y * xSize + x) * 4 + 2] = new Vector3((ax + 1) * level.unitSize, (ay + 1) * level.unitSize);
+                m_vertices[(y * xSize + x) * 4 + 3] = new Vector3(ax * level.unitSize, (ay + 1) * level.unitSize);
+
+                indices[(y * xSize + x) * 6 + 0] = (y * xSize + x) * 4 + 0;
+                indices[(y * xSize + x) * 6 + 1] = (y * xSize + x) * 4 + 2;
+                indices[(y * xSize + x) * 6 + 2] = (y * xSize + x) * 4 + 1;
+                indices[(y * xSize + x) * 6 + 3] = (y * xSize + x) * 4 + 0;
+                indices[(y * xSize + x) * 6 + 4] = (y * xSize + x) * 4 + 3;
+                indices[(y * xSize + x) * 6 + 5] = (y * xSize + x) * 4 + 2;
+            }
+        }*/
 
         for (int y = startY; y >= endY; --y)
         {
@@ -262,12 +298,17 @@ public class ModuleGroupController : MonoBehaviour
                 CreateBlock(x, y, sprite);
             }
         }
+
+        /*mesh.vertices = m_vertices;
+        mesh.uv = m_uv;
+        mesh.SetIndices(indices, MeshTopology.Triangles, 0);
+        GetComponent<MeshFilter>().mesh = mesh;*/
     }
 
-	void Update ()
-	{
-	
-	}
+    void Update()
+    {
+
+    }
 
     struct Dimensions
     {
@@ -280,6 +321,32 @@ public class ModuleGroupController : MonoBehaviour
     {
         if (_sprite < 0)
             return;
+
+        /*Dimensions d = GetDimensions();
+        Vector2 uvCoord = new Vector2(0.0f, 0.0f);
+        int startX = m_uphillSize == 0 ? -1 : 0;
+        int endX = d.width + (m_downhillSize == 0 ? 1 : 0);
+        int startY = d.heightUpperDiff + 1;
+        int endY = -startingHeight;
+        int xSize = Mathf.Abs(startX - endX);
+        int ySize = Mathf.Abs(endY - startY - 1);
+        float uvXUnit = 1.0f / (float)tileRows;
+        float uvYUnit = 1.0f / (float)tileCols;
+
+        int y = startY - _y;
+        int x = _x - startX;
+
+        if (_sprite != 0)
+        {
+            
+        }
+
+        Debug.Log(x + " " + y + " " + xSize + "/" + ySize);
+
+        m_uv[(y * xSize + x) * 4 + 0] = new Vector2((uvCoord.x) * uvXUnit, (uvCoord.y + 1.0f) * uvYUnit);
+        m_uv[(y * xSize + x) * 4 + 1] = new Vector2((uvCoord.x + 1.0f) * uvXUnit, (uvCoord.y + 1.0f) * uvYUnit);
+        m_uv[(y * xSize + x) * 4 + 2] = new Vector2((uvCoord.x + 1.0f) * uvXUnit, (uvCoord.y) * uvYUnit);
+        m_uv[(y * xSize + x) * 4 + 3] = new Vector2((uvCoord.x) * uvXUnit, (uvCoord.y) * uvYUnit);*/
 
         GameObject block = new GameObject();
         block.name = "Block";
@@ -301,4 +368,7 @@ public class ModuleGroupController : MonoBehaviour
         result.heightLowerDiff = Mathf.Min(m_uphillSize - m_downhillSize, 0);
         return result;
     }
+
+    /*Vector3[] m_vertices;
+    Vector2[] m_uv;*/
 }

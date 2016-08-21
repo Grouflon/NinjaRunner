@@ -11,6 +11,8 @@ GameObject:
   - 114: {fileID: 11426318}
   - 114: {fileID: 11428750}
   - 50: {fileID: 5014710}
+  - 33: {fileID: 3371436}
+  - 23: {fileID: 2309816}
   m_Layer: 0
   m_Name: ModuleGroup
   m_TagString: Untagged
@@ -30,6 +32,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!23 &2309816
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149396}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 06d49d0d4182d4c46bda0fc7136ab3dd, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!33 &3371436
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149396}
+  m_Mesh: {fileID: 0}
 --- !u!50 &5014710
 Rigidbody2D:
   serializedVersion: 2
@@ -79,6 +114,11 @@ MonoBehaviour:
   - {fileID: 21300030, guid: 6598be3ec0e14124f9befe154abb9e21, type: 3}
   - {fileID: 21300032, guid: 6598be3ec0e14124f9befe154abb9e21, type: 3}
   - {fileID: 21300034, guid: 6598be3ec0e14124f9befe154abb9e21, type: 3}
+  m_uphillSize: 0
+  m_blockSize: 0
+  m_downhillSize: 0
+  tileRows: 5
+  tileCols: 4
 --- !u!114 &11428750
 MonoBehaviour:
   m_ObjectHideFlags: 1
