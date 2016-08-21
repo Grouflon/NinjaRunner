@@ -14,8 +14,12 @@ public class PlayerController : MonoBehaviour
     public float raycastUpperDistance = 0.5f;
     public float jumpControlTime = 1.0f;
 
+    [Header ("Audio Stuff")]
     public GameObject jumpSoundPrefab;
     public GameObject jumpVoxSoundPrefab;
+    public GameObject slideSoundPrefab;
+    private bool slideSfxHasPlayed = false;
+    private LoopAudioPlayer slideLoopPlayer;
 
     public bool IsTouchingGround()
     {
@@ -193,6 +197,20 @@ public class PlayerController : MonoBehaviour
 
         // RESET
         m_needRoll = false;
+
+        // SLIDE SFX
+        if (m_sliding && !slideSfxHasPlayed)
+        {
+            slideSfxHasPlayed = true;
+            GameObject slideSfxGo = (GameObject)Instantiate(slideSoundPrefab, this.gameObject.transform.position, Quaternion.identity);
+            slideSfxGo.transform.parent = this.gameObject.transform;
+            slideLoopPlayer = slideSfxGo.GetComponent<LoopAudioPlayer>();
+        }
+        else if (!m_sliding && slideSfxHasPlayed)
+        {
+            slideSfxHasPlayed = false;
+            slideLoopPlayer.Stop();
+        }
 	}
 
     float m_verticalVelocity = 0.0f;
