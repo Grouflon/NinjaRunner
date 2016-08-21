@@ -10,6 +10,8 @@ GameObject:
   - 4: {fileID: 486808}
   - 114: {fileID: 11440596}
   - 114: {fileID: 11486878}
+  - 114: {fileID: 11485844}
+  - 82: {fileID: 8286264}
   m_Layer: 0
   m_Name: AmbientAudio
   m_TagString: Untagged
@@ -29,6 +31,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!82 &8286264
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 147070}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300312, guid: 9403cdc1d7be5ae43a8e9de83b285f68,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 2fa203b695b946a4694773832c6aa227, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.8
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &11440596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -40,6 +117,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea27c18aecf0be4e909451771b519ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11485844
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 147070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d7e61e6d56af94da7a095496ea385e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 8286264}
+  fadeInTime: 2
+  fadeOutTime: 4
+  minPitch: 1
+  maxPitch: 1
+  randomStartPoint: 1
 --- !u!114 &11486878
 MonoBehaviour:
   m_ObjectHideFlags: 1

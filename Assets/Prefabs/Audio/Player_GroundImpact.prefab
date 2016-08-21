@@ -1,43 +1,43 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &172760
+--- !u!1 &132386
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 461776}
-  - 114: {fileID: 11488614}
-  - 82: {fileID: 8221336}
+  - 4: {fileID: 495688}
+  - 114: {fileID: 11436160}
+  - 82: {fileID: 8237610}
   m_Layer: 0
-  m_Name: Player_Fst
+  m_Name: Player_GroundImpact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &461776
+--- !u!4 &495688
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172760}
+  m_GameObject: {fileID: 132386}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!82 &8221336
+--- !u!82 &8237610
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172760}
+  m_GameObject: {fileID: 132386}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24308622, guid: 9403cdc1d7be5ae43a8e9de83b285f68,
+  OutputAudioMixerGroup: {fileID: 24353044, guid: 9403cdc1d7be5ae43a8e9de83b285f68,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
@@ -104,32 +104,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &11488614
+--- !u!114 &11436160
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172760}
+  m_GameObject: {fileID: 132386}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8676dec280065ca42a6fae7d1d07a0b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 9ce8df32b5c78e14d9bf0fcf6a397cdc, type: 3}
-  - {fileID: 8300000, guid: 4f9e27e494cb60649bbfbbbcc79c37dd, type: 3}
-  - {fileID: 8300000, guid: 7617e288e9114584997d70082bff4076, type: 3}
-  - {fileID: 8300000, guid: 1ccb2d98933648a4296e193473a63f90, type: 3}
-  - {fileID: 8300000, guid: 4e05b949bb5bf06498a25090e83f2486, type: 3}
-  - {fileID: 8300000, guid: 9767b7991a14ca14c976deaea61d12ce, type: 3}
-  - {fileID: 8300000, guid: 631e576a5a4dcf844866837464a7a3e6, type: 3}
-  - {fileID: 8300000, guid: 1d7bdc0e66a25704c9b85805c8aed4f5, type: 3}
-  - {fileID: 8300000, guid: d356e15ec5352f24bb5dcea05164738a, type: 3}
-  - {fileID: 8300000, guid: 35ba618fc6588054aa50fc8ce8ffc45e, type: 3}
-  minVolume: 0.6
-  maxVolume: 1
+  - {fileID: 8300000, guid: 63f5b2fcb8d1f38418361061dbd78207, type: 3}
+  - {fileID: 8300000, guid: 43e09c9b5ae920645abd13cccac2703d, type: 3}
+  - {fileID: 8300000, guid: 486f381e3e4112f47ae7fdbeed98958d, type: 3}
+  - {fileID: 8300000, guid: c1d317429702ccc4a85555d89bf554a3, type: 3}
+  minVolume: 0.1
+  maxVolume: 0.9
   minPitch: 0.8
-  maxPitch: 1.1
+  maxPitch: 1.2
   probability: 1
 --- !u!1001 &100100000
 Prefab:
@@ -140,5 +134,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 172760}
+  m_RootGameObject: {fileID: 132386}
   m_IsPrefabParent: 1
