@@ -5,30 +5,24 @@ public class ModuleGroupController : MonoBehaviour
 {
     public LevelSpawnController level;
 
-    public int startingHeight;
+    public int startingHeight = 0;
     public Sprite[] spriteSheet;
 
-    public void SetUphillSize(int _size)
-    {
-        m_uphillSize = _size;
-    }
-
-    public void SetBlockSize(int _size)
-    {
-        m_blockSize = _size;
-    }
-
-    public void SetDownhillSize(int _size)
-    {
-        m_downhillSize = _size;
-    }
+    public int m_uphillSize = 0;
+    public int m_blockSize = 0;
+    public int m_downhillSize = 0;
 
     void Start ()
 	{
-        SetUphillSize(0); //2
+        /*SetUphillSize(4); //2
         SetBlockSize(4);
-        SetDownhillSize(4); //7
-        startingHeight = 10;
+        SetDownhillSize(7); //7
+        startingHeight = 10;*/
+
+
+        Vector3 position = transform.position;
+        position.y = startingHeight * level.unitSize;
+        transform.position = position;
 
         GenerateGroup();
 	}
@@ -120,17 +114,23 @@ public class ModuleGroupController : MonoBehaviour
                         // REGULAR 
                         if (verticalDiff == 0)
                         {
-                            if (y == -2)
+                            if (y == 0)
                             {
                                 sprite = 12;
                             }
-                            else if (y < -2)
+                            else if (y < 0)
                             {
-                                sprite = 15;
+                                if (x > 0 || m_uphillSize == 0)
+                                {
+                                    sprite = 15;
+                                }
                             }
                             else
                             {
-                                sprite = 6;
+                                if (((startY - y) + x > m_uphillSize) && (x - (m_uphillSize + m_blockSize)) < (startY - y))
+                                {
+                                    sprite = 6;
+                                }
                             }
                         }
                         // ACENDING
@@ -199,7 +199,7 @@ public class ModuleGroupController : MonoBehaviour
                         else if (verticalDiff < 0)
                         {
                             // UPHILL + BLOCK
-                            if (x < uphillSize + m_blockSize && x > 0)
+                            if (x < m_uphillSize + m_blockSize && x > startX)
                             {
                                 if (y == 0)
                                 {
@@ -215,7 +215,7 @@ public class ModuleGroupController : MonoBehaviour
                                 }
                             }
                             // DOWNHILL
-                            else if (x >= d.width - uphillSize)
+                            else if (x >= d.width - m_uphillSize)
                             {
                                 if (y == verticalDiff)
                                 {
@@ -225,13 +225,13 @@ public class ModuleGroupController : MonoBehaviour
                                 {
                                     sprite = 15;
                                 }
-                                else if ((x - (uphillSize + m_blockSize)) < (startY - y))
+                                else if ((x - (m_uphillSize + m_blockSize)) < (startY - y))
                                 {
                                     sprite = 6;
                                 }
                             }
                             // ARCH
-                            else if (y == verticalDiff && x == (d.width - uphillSize - 1))
+                            else if (y == verticalDiff && x == (d.width - m_uphillSize - 1))
                             {
                                 sprite = 16;
                             }
@@ -242,7 +242,7 @@ public class ModuleGroupController : MonoBehaviour
                                 {
                                     sprite = 13;
                                 }
-                                else if ((x - m_blockSize + 1) > (startY - y) && (x - (uphillSize + m_blockSize)) < (startY - y))
+                                else if ((x - m_blockSize + 1) > (startY - y) && (x - (m_uphillSize + m_blockSize)) < (startY - y))
                                 {
                                     sprite = 6;
                                 }
@@ -298,8 +298,4 @@ public class ModuleGroupController : MonoBehaviour
         result.heightLowerDiff = Mathf.Min(m_uphillSize - m_downhillSize, 0);
         return result;
     }
-
-    private int m_uphillSize = 0;
-    private int m_blockSize = 0;
-    private int m_downhillSize = 0;
 }

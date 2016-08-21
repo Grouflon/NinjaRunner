@@ -7,6 +7,7 @@ public class LevelSpawnController : MonoBehaviour
     public GameController game;
     public BlockController blockPrefab;
     public SlopeController slopePrefab;
+    public ModuleGroupController moduleGroupPrefab;
 
     public float unitSize = 1.0f;
     public int minBlockWidth = 5;
@@ -31,8 +32,6 @@ public class LevelSpawnController : MonoBehaviour
     public float uphillWeight = 1.0f;
     public float downhillWeight = 1.0f;
 
-    // TODO: speed modifiers
-
     enum ModuleType
     {
         Block = 0,
@@ -50,6 +49,11 @@ public class LevelSpawnController : MonoBehaviour
 
         m_currentHeight = startHeight;
 
+        m_currentGroup = (ModuleGroupController)Instantiate(moduleGroupPrefab, new Vector3(m_viewportStart, m_currentHeight * unitSize, 0.0f), Quaternion.identity);
+        m_currentGroup.startingHeight = m_currentHeight;
+        m_currentGroup.GetComponent<BlockController>().game = game;
+        m_currentGroup.level = this;
+
         float blockWidth = m_predictionDistance;
         BlockController block = (BlockController)Instantiate(blockPrefab, new Vector3(m_viewportStart, m_currentHeight * unitSize, 0.0f), Quaternion.identity);
         block.game = game;
@@ -57,6 +61,9 @@ public class LevelSpawnController : MonoBehaviour
         scale.x = blockWidth;
         block.width = blockWidth;
         block.transform.localScale = scale;
+
+        m_currentGroup.GetComponent<BlockController>().width += blockWidth;
+        m_currentGroup.m_blockSize = (int)blockWidth;
 
         m_previousModuleType = ModuleType.Block;
         m_distancePredicted += blockWidth;
@@ -66,6 +73,8 @@ public class LevelSpawnController : MonoBehaviour
             GenerateNewModule();
         }
         while (m_previousModuleType != ModuleType.Gap);
+
+        m_currentGroup = null;
     }
 	
 	void FixedUpdate ()
@@ -78,9 +87,19 @@ public class LevelSpawnController : MonoBehaviour
         {
             do
             {
+                if (!m_currentGroup)
+                {
+                    m_currentGroup = (ModuleGroupController)Instantiate(moduleGroupPrefab, new Vector3(m_viewportStart + (m_distancePredicted - m_distancePassed), m_currentHeight * unitSize, 0.0f), Quaternion.identity);
+                    //m_currentGroup.startingHeight = m_currentHeight;
+                    m_currentGroup.GetComponent<BlockController>().game = game;
+                    m_currentGroup.level = this;
+                }
+
                 GenerateNewModule();
             }
             while (m_previousModuleType != ModuleType.Gap);
+
+            m_currentGroup = null;
         }
 
         m_distancePassed += game.GetGameSpeed() * Time.fixedDeltaTime;
@@ -114,12 +133,18 @@ public class LevelSpawnController : MonoBehaviour
                         m_currentHeight = blockHeight;
                     }
 
-                    BlockController block = (BlockController)Instantiate(blockPrefab, new Vector3(m_viewportStart + (m_distancePredicted - m_distancePassed), m_currentHeight * unitSize, 0.0f), Quaternion.identity);
+                    BlockController block = (BlockController)Instantiate(blockPrefab, new Vector3(m_viewportStart + (m_distancePredicted - m_distancePassed), (float)m_currentHeight * unitSize, 0.0f), Quaternion.identity);
                     block.game = game;
                     Vector3 scale = block.transform.localScale;
                     scale.x = blockWidth;
                     block.width = blockWidth;
                     block.transform.localScale = scale;
+
+                    if (m_currentGroup.m_uphillSize == 0)
+                        m_currentGroup.startingHeight = m_currentHeight;
+
+                    m_currentGroup.GetComponent<BlockController>().width += blockWidth;
+                    m_currentGroup.m_blockSize = blockWidth;
 
                     moduleSize = (float)blockWidth * unitSize;
                 }
@@ -142,6 +167,10 @@ public class LevelSpawnController : MonoBehaviour
                     block.width = blockWidth;
                     block.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f) * blockWidth;
 
+                    m_currentGroup.startingHeight = m_currentHeight;
+                    m_currentGroup.GetComponent<BlockController>().width += blockWidth;
+                    m_currentGroup.m_uphillSize = blockWidth;
+
                     moduleSize = (float)blockWidth * unitSize;
                     m_currentHeight += blockWidth;
                 }
@@ -161,6 +190,9 @@ public class LevelSpawnController : MonoBehaviour
                     block.game = game;
                     block.width = blockWidth;
                     block.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f) * blockWidth;
+
+                    m_currentGroup.GetComponent<BlockController>().width += blockWidth;
+                    m_currentGroup.m_downhillSize = blockWidth;
 
                     moduleSize = (float)blockWidth * unitSize;
                     m_currentHeight -= blockWidth;
@@ -240,4 +272,6 @@ public class LevelSpawnController : MonoBehaviour
     float m_predictionDistance = 0.0f;
     float m_distancePredicted = 0.0f;
     float m_distancePassed = 0.0f;
+
+    ModuleGroupController m_currentGroup = null;
 }

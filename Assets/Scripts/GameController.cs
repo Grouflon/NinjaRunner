@@ -110,7 +110,7 @@ public class GameController : MonoBehaviour
 
     void OnPlayerDied()
     {
-        //SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Main");
     }
 
     void BumpScore()
