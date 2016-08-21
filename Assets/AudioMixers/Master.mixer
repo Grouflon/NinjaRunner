@@ -28,6 +28,7 @@ AudioMixerController:
     - 643196091b8bd074f9413029fac5e794
     - 00e29408dd56375429b2fef672c564ed
     - f47b49803c142cc4bafe6ceeed840f4f
+    - 8fc7393572c45d142aa533b9de281aa7
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24549634}
@@ -173,6 +174,23 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!243 &24353044
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Ground Impact
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 8fc7393572c45d142aa533b9de281aa7
+  m_Children: []
+  m_Volume: 4b74bc146016a914c8ce9433e5365d6d
+  m_Pitch: 3135b5316746f064a8a168a89031da54
+  m_Effects:
+  - {fileID: 24467484}
+  m_UserColorIndex: 7
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!243 &24358960
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -204,6 +222,7 @@ AudioMixerGroupController:
   - {fileID: 24380616}
   - {fileID: 24350618}
   - {fileID: 24358960}
+  - {fileID: 24353044}
   m_Volume: b847aec22a2a1a74bb30f9f39ad51bc2
   m_Pitch: 8910874af74562c429c7e481c618b927
   m_Effects:
@@ -372,6 +391,19 @@ AudioMixerEffectController:
   m_EffectID: 93f71bc506d3f784a8a962a7b16007a8
   m_EffectName: Attenuation
   m_MixLevel: 06667f41107817e40a727d6f59223e54
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &24467484
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 81e76cdcaa914a044bb79402baaaae17
+  m_EffectName: Attenuation
+  m_MixLevel: 67c8f761b17755e4dab30bd811f08cef
   m_Parameters: []
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
