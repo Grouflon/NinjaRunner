@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour
 
     public GameObject boostSfx;
     public GameObject deathSfx;
+    private bool deathSfxhasPlayed = false;
 
     public float blackoutTime = 0.5f;
     public RawImage blackout;
@@ -38,6 +39,7 @@ public class GameController : MonoBehaviour
     void Start ()
 	{
         MusicController.instance.game = this;
+        deathSfxhasPlayed = false;
         m_gameSpeed = startingSpeed;
 
         m_scoreBumpTimer = scoreBumpTime;
@@ -157,9 +159,13 @@ public class GameController : MonoBehaviour
     }
 
     void OnPlayerDied()
-    {        
-        GameObject go = (GameObject)Instantiate(deathSfx, new Vector3(0, 0, 0), Quaternion.identity);
-        go.transform.parent = AmbientAudioController.instance.gameObject.transform;
+    {     
+        if (!deathSfxhasPlayed)
+        {
+            deathSfxhasPlayed = true;
+            GameObject go = (GameObject)Instantiate(deathSfx, new Vector3(0, 0, 0), Quaternion.identity);
+            go.transform.parent = AmbientAudioController.instance.gameObject.transform;
+        }
 
         m_gameOver = true;
         m_gameOverTime = Time.time;
