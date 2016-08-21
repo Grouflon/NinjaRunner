@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 486808}
   - 114: {fileID: 11440596}
   - 114: {fileID: 11486878}
+  - 114: {fileID: 11480078}
   m_Layer: 0
   m_Name: AmbientAudio
   m_TagString: Untagged
@@ -40,6 +41,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea27c18aecf0be4e909451771b519ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11480078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 147070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3348a4e4ca1206c4cabfc2398adcde74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundPrefab: {fileID: 108512, guid: 4a26ea8ba41849b45804c7bcd89e0391, type: 2}
 --- !u!114 &11486878
 MonoBehaviour:
   m_ObjectHideFlags: 1

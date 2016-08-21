@@ -15,14 +15,6 @@ public class MusicController : MonoBehaviour
     [Range(0, 10)]
     private float musicFadeTime;
 
-    [SerializeField]
-    [Range(0, 30)]
-    private float lowMidCross;
-    [SerializeField]
-    [Range(0, 30)]
-    private float midHighCross;
-
-
     [HideInInspector]
     public AudioMixerSnapshot currentSnapshot;
 

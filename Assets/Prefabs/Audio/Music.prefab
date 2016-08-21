@@ -41,9 +41,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicLayers: {fileID: 198878, guid: 1a120a03b4bea9e4a9d7dbcf3d9d4ec1, type: 2}
   snapshots:
-  - {fileID: 24500003, guid: 9403cdc1d7be5ae43a8e9de83b285f68, type: 2}
-  - {fileID: 24578806, guid: 9403cdc1d7be5ae43a8e9de83b285f68, type: 2}
-  - {fileID: 24549634, guid: 9403cdc1d7be5ae43a8e9de83b285f68, type: 2}
+  - {fileID: 24500003, guid: 1d2321a820244f647bbdd6c811f7f117, type: 2}
+  - {fileID: 24571124, guid: 1d2321a820244f647bbdd6c811f7f117, type: 2}
+  - {fileID: 24541498, guid: 1d2321a820244f647bbdd6c811f7f117, type: 2}
   musicFadeTime: 3
   lowMidCross: 10
   midHighCross: 14
