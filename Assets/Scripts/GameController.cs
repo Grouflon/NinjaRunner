@@ -23,6 +23,8 @@ public class GameController : MonoBehaviour
 
     public PlayerController player;
 
+    public GameObject boostSfx;
+
     public float GetGameSpeed()
     {
         return m_gameSpeed + m_speedBoost;
@@ -106,6 +108,7 @@ public class GameController : MonoBehaviour
 
         SpeedBoost(niceLandingSpeedBoost);
         BumpScore();
+        Instantiate(boostSfx);
     }
 
     void OnPlayerDied()
