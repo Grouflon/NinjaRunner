@@ -4,8 +4,9 @@ using System.Collections;
 public class ScrollingBackdrop : MonoBehaviour
 {
     public GameController game;
+    public CameraController camera;
     public float xScrollingRatio = 1.0f;
-    public float yScrollingRatio = 0.0f;
+    public float maxTextureOffset = 0.08f;
 
     void Start ()
 	{
@@ -20,6 +21,13 @@ public class ScrollingBackdrop : MonoBehaviour
         {
             offset.x -= 1.0f;
         }
+
+
+        offset.y = camera.GetCurrentHeightRatio() * maxTextureOffset;
+
+        Debug.Log(offset.y);
+
+
         m_material.mainTextureOffset = offset;
 	}
 

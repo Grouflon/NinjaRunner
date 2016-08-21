@@ -10,6 +10,14 @@ public class CameraController : MonoBehaviour
     public float predictionTime = 1.0f;
     public bool showPrediction = false;
 
+    public float GetCurrentHeightRatio()
+    {
+        float maxPlayerHeight = level.maxHeight * level.unitSize;
+        float maxCameraHeight = maxPlayerHeight + 4 * level.unitSize - m_viewportHeight;
+
+        return (transform.position.y - m_minCameraHeight) / (maxCameraHeight - m_minCameraHeight);
+    }
+
 	void Start ()
 	{
         m_camera = GetComponent<Camera>();

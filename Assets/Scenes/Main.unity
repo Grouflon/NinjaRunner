@@ -201,7 +201,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 549504300}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.51, y: 0.08, z: 19}
+  m_LocalPosition: {x: 0.51, y: 0.47, z: 19}
   m_LocalScale: {x: 22.082872, y: 11.041437, z: 1.3147603}
   m_Children: []
   m_Father: {fileID: 577335475}
@@ -218,8 +218,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   game: {fileID: 1322904322}
+  camera: {fileID: 577335476}
   xScrollingRatio: 0.03
-  yScrollingRatio: 0
+  maxTextureOffset: 0.07
 --- !u!1 &577335470
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +327,7 @@ MonoBehaviour:
   game: {fileID: 1322904322}
   acc: 0.015
   predictionTime: 1.5
-  showPrediction: 1
+  showPrediction: 0
 --- !u!114 &711865297 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11434428, guid: 5ece3b41e389b484ab46d8a84c54655e,
@@ -892,7 +893,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1807426998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -905,8 +906,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   game: {fileID: 1322904322}
+  camera: {fileID: 577335476}
   xScrollingRatio: 0.04
-  yScrollingRatio: 0
+  maxTextureOffset: 0.15
 --- !u!23 &1807426999
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -947,8 +949,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1807426997}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.41, y: -0.01, z: 18}
-  m_LocalScale: {x: 20.886702, y: 10.443337, z: 0.17159472}
+  m_LocalPosition: {x: 0.41, y: 0.71, z: 18}
+  m_LocalScale: {x: 23.515457, y: 11.757719, z: 0.19319136}
   m_Children: []
   m_Father: {fileID: 577335475}
   m_RootOrder: 1
