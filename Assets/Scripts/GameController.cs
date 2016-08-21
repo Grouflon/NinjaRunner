@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour
     public PlayerController player;
 
     public GameObject boostSfx;
+    public GameObject deathSfx;
 
     public float GetGameSpeed()
     {
@@ -112,7 +113,10 @@ public class GameController : MonoBehaviour
     }
 
     void OnPlayerDied()
-    {
+    {        
+        GameObject go = (GameObject)Instantiate(deathSfx, new Vector3(0, 0, 0), Quaternion.identity);
+        go.transform.parent = AmbientAudioController.instance.gameObject.transform;
+
         SceneManager.LoadScene("Main");
     }
 
