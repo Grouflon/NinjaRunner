@@ -198,30 +198,32 @@ public class ModuleGroupController : MonoBehaviour
                         // DESCENDING
                         else if (verticalDiff < 0)
                         {
+                            float baseHeight = m_uphillSize == 0 ? -2 : 0; // Don't ask
+
                             // UPHILL + BLOCK
                             if (x < m_uphillSize + m_blockSize && x > startX)
                             {
-                                if (y == 0)
+                                if (y == baseHeight)
                                 {
                                     sprite = 12;
                                 }
-                                else if (y < 0)
+                                else if (y < baseHeight)
                                 {
                                     sprite = 15;
                                 }
-                                else if ((x + (startY - y) > m_uphillSize ))
+                                else if ((x + (startY - y) > m_uphillSize))
                                 {
                                     sprite = 6;
                                 }
                             }
                             // DOWNHILL
-                            else if (x >= d.width - m_uphillSize)
+                            else if (x >= d.width - uphillSize)
                             {
-                                if (y == verticalDiff)
+                                if (y == verticalDiff + baseHeight)
                                 {
                                     sprite = 12;
                                 }
-                                else if ( y < verticalDiff )
+                                else if ( y < verticalDiff + baseHeight)
                                 {
                                     sprite = 15;
                                 }
@@ -231,18 +233,19 @@ public class ModuleGroupController : MonoBehaviour
                                 }
                             }
                             // ARCH
-                            else if (y == verticalDiff && x == (d.width - m_uphillSize - 1))
+                            else if (y == verticalDiff + baseHeight && x == (d.width - m_uphillSize - 1))
                             {
                                 sprite = 16;
                             }
                             // CHANGE ZONE
                             else if (x > 0)
                             {
-                                if (y > verticalDiff && y <= 0 && (x - m_blockSize + 1) == (startY - y))
+                                
+                                if (y > verticalDiff + baseHeight && y <= baseHeight && (x - m_blockSize - baseHeight + 1) == (startY - y))
                                 {
                                     sprite = 13;
                                 }
-                                else if ((x - m_blockSize + 1) > (startY - y) && (x - (m_uphillSize + m_blockSize)) < (startY - y))
+                                else if ((x - m_blockSize - baseHeight + 1) > (startY - y) && (x - (m_uphillSize + m_blockSize )) < (startY - y))
                                 {
                                     sprite = 6;
                                 }
