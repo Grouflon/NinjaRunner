@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public GameController game;
     public GameObject graphic;
     public float stepDownDistance = 0.5f;
+    public float outStepDownTime = 0.02f;
     public float raycastUpperDistance = 0.5f;
     public float jumpControlTime = 1.0f;
 
@@ -75,11 +76,22 @@ public class PlayerController : MonoBehaviour
                 {
                     position.y = hit.point.y;
                     m_verticalVelocity = 0.0f;
+                    m_outStepDownTimer = 0.0f;
                 }
                 else
                 {
-                    m_touchingGround = false;
-                    m_sliding = false;
+                    if (m_outStepDownTimer > outStepDownTime)
+                    {
+                        m_touchingGround = false;
+                        m_sliding = false;
+                        m_outStepDownTimer = 0.0f;
+                    }
+                    else
+                    {
+                        position.y = hit.point.y;
+                        m_verticalVelocity = 0.0f;
+                        m_outStepDownTimer += _dt;
+                    }
                 }
             }
             else
@@ -171,4 +183,6 @@ public class PlayerController : MonoBehaviour
 
     float m_jumpControlTimer = 0.0f;
     bool m_isPressingJump = false;
+
+    float m_outStepDownTimer = 0.0f;
 }
