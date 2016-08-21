@@ -26,10 +26,10 @@ public class MusicController : MonoBehaviour
     [HideInInspector]
     public AudioMixerSnapshot currentSnapshot;
 
-    [HideInInspector]
     public GameController game;
 
     public static MusicController instance;
+    private float initialGameSpeed;
 
     // Singleton
     void Awake()
@@ -41,6 +41,8 @@ public class MusicController : MonoBehaviour
             Destroy(this.gameObject);
 
         DontDestroyOnLoad(this.gameObject);
+
+        initialGameSpeed = game.gameSpeed;
     }
 
     void Start()
@@ -56,20 +58,20 @@ public class MusicController : MonoBehaviour
 
     void Update()
     {
-        if (game.gameSpeed < lowMidCross && currentSnapshot != snapshots[0])
+        if (game.gameSpeed < initialGameSpeed * 2f && currentSnapshot != snapshots[0])
         {
             snapshots[0].TransitionTo(musicFadeTime);
             currentSnapshot = snapshots[0];
         }
             
 
-        else if (game.gameSpeed >= lowMidCross && game.gameSpeed < midHighCross && currentSnapshot != snapshots[1])
+        else if (game.gameSpeed >= initialGameSpeed * 2f && game.gameSpeed < initialGameSpeed * 3f && currentSnapshot != snapshots[1])
         {
             snapshots[1].TransitionTo(musicFadeTime);
             currentSnapshot = snapshots[1];
         }
 
-        else if (game.gameSpeed >= midHighCross && currentSnapshot != snapshots[2])
+        else if (game.gameSpeed >= initialGameSpeed * 3f && currentSnapshot != snapshots[2])
         {
             snapshots[2].TransitionTo(musicFadeTime);
             currentSnapshot = snapshots[2];
