@@ -45,11 +45,12 @@ public class LoopAudioPlayer : MonoBehaviour {
     }
 
 	void Start () 
-    {   
+    {                  
+        source.Play();
+
         if (randomStartPoint)
             source.timeSamples = (Random.Range(0, source.clip.samples));
         
-        source.Play();
         fadingIn = true;
 	}
 
