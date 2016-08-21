@@ -2128,7 +2128,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 486808, guid: 15b7db772021f0b43bcadbde90179f92, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 15b7db772021f0b43bcadbde90179f92, type: 2}
@@ -2247,6 +2247,7 @@ MonoBehaviour:
   scoreBumpScale: 1.4
   scoreBumpTime: 0.5
   player: {fileID: 711865297}
+  boostSfx: {fileID: 169284, guid: c292b5cec2157084ea7489513128bea6, type: 2}
 --- !u!1 &1339576737
 GameObject:
   m_ObjectHideFlags: 0
