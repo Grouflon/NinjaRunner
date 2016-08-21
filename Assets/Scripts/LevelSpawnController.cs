@@ -73,7 +73,7 @@ public class LevelSpawnController : MonoBehaviour
             GenerateNewModule();
         }
 
-        m_distancePassed += game.gameSpeed * Time.fixedDeltaTime;
+        m_distancePassed += game.GetGameSpeed() * Time.fixedDeltaTime;
 	}
 
     void GenerateNewModule()
@@ -85,7 +85,7 @@ public class LevelSpawnController : MonoBehaviour
         {
             case ModuleType.Gap:
                 {
-                    float ratio = (game.gameSpeed / game.startingSpeed);
+                    float ratio = (game.GetGameSpeed() / game.startingSpeed);
                     int gapWidth = UnityEngine.Random.Range(Mathf.FloorToInt((float)minGapWidth * ratio), Mathf.FloorToInt((float)maxGapWidth * ratio));
 
                     moduleSize = (float)gapWidth * unitSize;

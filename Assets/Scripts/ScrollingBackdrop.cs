@@ -16,7 +16,7 @@ public class ScrollingBackdrop : MonoBehaviour
 	void Update ()
 	{
         Vector2 offset = m_material.mainTextureOffset;
-        offset.x += game.gameSpeed * Time.deltaTime * xScrollingRatio;
+        offset.x += game.GetGameSpeed() * Time.deltaTime * xScrollingRatio;
         while(offset.x > 2.0f)
         {
             offset.x -= 1.0f;

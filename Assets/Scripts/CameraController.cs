@@ -9,11 +9,12 @@ public class CameraController : MonoBehaviour
     public float acc = 0.5f;
     public float predictionTime = 1.0f;
     public bool showPrediction = false;
+    public int topAdditionalUnits = 7;
 
     public float GetCurrentHeightRatio()
     {
         float maxPlayerHeight = level.maxHeight * level.unitSize;
-        float maxCameraHeight = maxPlayerHeight + 4 * level.unitSize - m_viewportHeight;
+        float maxCameraHeight = maxPlayerHeight + topAdditionalUnits * level.unitSize - m_viewportHeight;
 
         return (transform.position.y - m_minCameraHeight) / (maxCameraHeight - m_minCameraHeight);
     }
@@ -35,9 +36,9 @@ public class CameraController : MonoBehaviour
 
         float minPlayerHeight = level.minHeight * level.unitSize;
         float maxPlayerHeight = level.maxHeight * level.unitSize;
-        float maxCameraHeight = maxPlayerHeight + 4 * level.unitSize - m_viewportHeight;
+        float maxCameraHeight = maxPlayerHeight + topAdditionalUnits * level.unitSize - m_viewportHeight;
 
-        float predictionDistance = Mathf.Min(predictionTime * game.gameSpeed, m_camera.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, 0.0f)).x - player.transform.position.x - 0.5f);
+        float predictionDistance = Mathf.Min(predictionTime * game.GetGameSpeed(), m_camera.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, 0.0f)).x - player.transform.position.x - 0.5f);
 
         if (showPrediction)
             Debug.DrawLine(player.transform.position + new Vector3(predictionDistance, 50.0f, 0.0f), player.transform.position + new Vector3(predictionDistance, -100.0f, 0.0f), Color.red);

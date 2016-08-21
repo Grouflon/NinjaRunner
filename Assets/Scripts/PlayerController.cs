@@ -124,6 +124,7 @@ public class PlayerController : MonoBehaviour
                     if (hit.collider.gameObject.tag == "downhill")
                     {
                         m_sliding = true;
+                        game.OnNiceLanding();
                     }
 
                     if (hit.collider.gameObject.tag != "downhill" && hit.collider.gameObject.tag != "uphill" && position.y < m_jumpStartHeight)
@@ -155,6 +156,7 @@ public class PlayerController : MonoBehaviour
 
             m_isPressingJump = true;
             m_touchingGround = false;
+            m_sliding = false;
             m_jumpStartHeight = transform.position.y;
             m_verticalVelocity = 0.0f;
         }
@@ -171,7 +173,7 @@ public class PlayerController : MonoBehaviour
         // ANIMATOR
         m_animator.SetBool("IsTouchingGround", IsTouchingGround());
         m_animator.SetBool("IsSliding", m_sliding);
-        m_animator.SetFloat("SpeedRatio", Mathf.Min(game.gameSpeed / cruiseSpeed, 1.0f));
+        m_animator.SetFloat("SpeedRatio", Mathf.Min(game.GetGameSpeed() / cruiseSpeed, 1.0f));
         if (m_needRoll)
         {
             m_animator.SetTrigger("Roll");

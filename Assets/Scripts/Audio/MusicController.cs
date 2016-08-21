@@ -42,7 +42,7 @@ public class MusicController : MonoBehaviour
 
         DontDestroyOnLoad(this.gameObject);
 
-        initialGameSpeed = game.gameSpeed;
+        initialGameSpeed = game.GetGameSpeed();
     }
 
     void Start()
@@ -58,20 +58,20 @@ public class MusicController : MonoBehaviour
 
     void Update()
     {
-        if (game.gameSpeed < initialGameSpeed * 2f && currentSnapshot != snapshots[0])
+        if (game.GetGameSpeed() < initialGameSpeed * 2f && currentSnapshot != snapshots[0])
         {
             snapshots[0].TransitionTo(musicFadeTime);
             currentSnapshot = snapshots[0];
         }
             
 
-        else if (game.gameSpeed >= initialGameSpeed * 2f && game.gameSpeed < initialGameSpeed * 3f && currentSnapshot != snapshots[1])
+        else if (game.GetGameSpeed() >= initialGameSpeed * 2f && game.GetGameSpeed() < initialGameSpeed * 3f && currentSnapshot != snapshots[1])
         {
             snapshots[1].TransitionTo(musicFadeTime);
             currentSnapshot = snapshots[1];
         }
 
-        else if (game.gameSpeed >= initialGameSpeed * 3f && currentSnapshot != snapshots[2])
+        else if (game.GetGameSpeed() >= initialGameSpeed * 3f && currentSnapshot != snapshots[2])
         {
             snapshots[2].TransitionTo(musicFadeTime);
             currentSnapshot = snapshots[2];

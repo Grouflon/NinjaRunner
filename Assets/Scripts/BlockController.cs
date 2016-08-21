@@ -14,7 +14,7 @@ public class BlockController : MonoBehaviour
 	
     void FixedUpdate()
     {
-        m_rigidbody.velocity = new Vector2(-game.gameSpeed, 0.0f);
+        m_rigidbody.velocity = new Vector2(-game.GetGameSpeed(), 0.0f);
     }
 
     void Update ()

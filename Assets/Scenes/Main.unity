@@ -328,6 +328,7 @@ MonoBehaviour:
   acc: 0.015
   predictionTime: 1.5
   showPrediction: 0
+  topAdditionalUnits: 7
 --- !u!114 &711865297 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11434428, guid: 5ece3b41e389b484ab46d8a84c54655e,
@@ -583,11 +584,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8bcaf741672654d9d596c3aea63f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  niceLandingSpeedBoost: 3
+  niceLandingScore: 100
+  speedBoostTime: 4
+  speedBoostDecayTime: 2
   startingSpeed: 6
   acceleration: 0.2
   gravity: -50
   scoreText: {fileID: 1546987245}
-  gameSpeed: 5
+  scoreBumpScale: 1.4
+  scoreBumpTime: 0.3
 --- !u!1 &1339576737
 GameObject:
   m_ObjectHideFlags: 0
