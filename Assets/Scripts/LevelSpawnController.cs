@@ -76,13 +76,18 @@ public class LevelSpawnController : MonoBehaviour
 
         m_currentGroup = null;
     }
+
+    void Update()
+    {
+        // KEEP VARS UPDATED IF WE TWEAK THINGS IN EDITOR
+        m_viewportStart = Camera.main.ScreenToWorldPoint(new Vector3(0.0f, 0.0f, 0.0f)).x;
+        m_viewportEnd = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, 0.0f, 0.0f)).x;
+        m_viewportLength = m_viewportEnd - m_viewportStart;
+        m_predictionDistance = Mathf.Ceil(m_viewportLength / unitSize) * unitSize;
+    }
 	
 	void FixedUpdate ()
 	{
-        // KEEP VARS UPDATED IF WE TWEAK THINGS IN EDITOR
-        m_predictionDistance = Mathf.Ceil(m_viewportLength / unitSize) * unitSize;
-
-
         while (m_distancePredicted < m_distancePassed + m_predictionDistance )
         {
             do
